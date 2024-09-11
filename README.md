@@ -1,5 +1,6 @@
 # CodeRush
 CS 321 Group Project.
+
 Trello Site: https://trello.com/b/0QnGV425 
 
 # Purpose:
@@ -22,6 +23,9 @@ WebSocket: `TBD`
 # Contributors: 
 
 Sabria Linton
+
 Abdullah Ali
+
 Michael Asomani
+
 Nicholas Hermreck
