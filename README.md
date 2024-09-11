@@ -1,5 +1,5 @@
 # CodeRush
-CS 321 Group Project
+CS 321 Group Project.
 Trello Site: https://trello.com/b/0QnGV425 
 
 # Purpose:
@@ -12,8 +12,11 @@ competition, making coding practice more engaging and efficient for users
 # Implementation
 
 Back-End: `Java` with `SpringBoot` 
+
 Front-End: `ReactJS` with `MUI` (Material-UI)
+
 Database: `MySQL`
+
 WebSocket: `TBD`
 
 # Contributors: 
