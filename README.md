@@ -29,3 +29,7 @@ Abdullah Ali
 Michael Asomani
 
 Nicholas Hermreck
+
+# Resources
+
+GitHub Commands: https://docs.google.com/document/d/1QDLvWocr1ZzOfDJWHIDcqL0KjYbnBgLPHBpo9Cz4Wnk/edit?usp=sharing
