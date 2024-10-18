@@ -2,6 +2,7 @@
 CS 321 Group Project.
 
 GitHub Page: https://abdullah-mehdi.github.io/CodeRush/
+
 Trello Site: https://trello.com/b/0QnGV425 
 
 # Purpose:
