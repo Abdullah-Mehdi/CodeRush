@@ -37,3 +37,5 @@ Nicholas Hermreck
 # Resources
 
 GitHub Commands: https://docs.google.com/document/d/1QDLvWocr1ZzOfDJWHIDcqL0KjYbnBgLPHBpo9Cz4Wnk/edit?usp=sharing
+
+Docker Setup and Usage (in context): https://docs.google.com/document/d/1K_JGmST5jqPNrK6aWo4QHkr0J23KWIf0hpZh8iINtPU/edit?usp=sharing
