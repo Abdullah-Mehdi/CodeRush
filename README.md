@@ -1,6 +1,7 @@
 # CodeRush
 CS 321 Group Project.
 
+GitHub Page: https://abdullah-mehdi.github.io/CodeRush/
 Trello Site: https://trello.com/b/0QnGV425 
 
 # Purpose:
@@ -19,6 +20,8 @@ Front-End: `ReactJS` with `MUI` (Material-UI)
 Database: `MySQL`
 
 WebSocket: `TBD`
+
+Development Environment: `Docker`
 
 # Contributors: 
 
