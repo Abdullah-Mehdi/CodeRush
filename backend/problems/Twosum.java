@@ -13,8 +13,32 @@
  */
 public class Problem {
     // Attributes
-    private String title = "Two Sum";
-    private String description = "Given an array of integers, return indices of the two numbers such that they add up to a specific target.";
-    private String difficulty = "Easy";
+    private String title = "";
+    private String description = "";
+    private String difficulty = "";
     private int[] testCaseNums = {};
+
+    // Constructor
+    public Problem() {}
+
+    // Getters
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public int[] getTestCaseNums() {
+        return testCaseNums;
+    }
+
+    public int getTarget() {
+        return target;
+    }
 }
