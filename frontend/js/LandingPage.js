@@ -17,6 +17,11 @@ function LandingPage() {
           CodeRush
         </Text>
 
+        {/* Logo */}
+        <Text textSize="title" textColor="black" m={{ l: "1rem" }}>
+          CodeRush
+        </Text>
+
         {/* Navigation Links */}
         <Div d="flex">
           <Anchor href="/" textColor="black" m={{ r: "1.5rem" }}>
