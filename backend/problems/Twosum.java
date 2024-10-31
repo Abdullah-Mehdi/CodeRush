@@ -11,3 +11,10 @@
  * Because nums[0] + nums[1] = 2 + 7 = 9,
  * return [0, 1].
  */
+public class Problem {
+    // Attributes
+    private String title = "Two Sum";
+    private String description = "Given an array of integers, return indices of the two numbers such that they add up to a specific target.";
+    private String difficulty = "Easy";
+    private int[] testCaseNums = {};
+}
