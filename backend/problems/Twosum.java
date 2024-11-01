@@ -1,44 +1,29 @@
-/**
- * Given an array of integers, return indices of the two numbers such that
- * they add up to a specific target.
- *
- * You may assume that each input would have exactly one solution, and
- * you may not use the same element twice.
- *
- * Example:
- * Given nums = [2, 7, 11, 15], target = 9,
- *
- * Because nums[0] + nums[1] = 2 + 7 = 9,
- * return [0, 1].
- */
-public class Problem {
+import java.util.*
+
+public class TwoSum {
+    // Instance of Problem
+    private Problem problem;
+
     // Attributes
-    private String title = "";
-    private String description = "";
-    private String difficulty = "";
-    private int[] testCaseNums = {};
+    private String title = "Two Sum";
+    private String description = "Given an array of integers, return indices of the two numbers such that they add up to a specific target.";
+    private String difficulty = "Easy";
+    private List<Object[]> testCases; // List of test cases
+    private int target = 9; // Example target
 
     // Constructor
-    public Problem() {}
+    public TwoSum() {
+        // Initialize test cases
+        testCases = new ArrayList<>();
+        testCases.add(new Object[] { new int[]{2, 7, 11, 15}, target });
 
-    // Getters
-    public String getTitle() {
-        return title;
+        // Initialize Problem instance with specific attributes
+        problem = new Problem();
+        problem.setTitle(title);
+        problem.setDescription(description);
+        problem.setDifficulty(difficulty);
+        problem.setTestCases(testCases);
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public int[] getTestCaseNums() {
-        return testCaseNums;
-    }
-
-    public int getTarget() {
-        return target;
-    }
+    // Additional methods as needed...
 }
