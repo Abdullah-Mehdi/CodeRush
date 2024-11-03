@@ -1,5 +1,6 @@
 import React from 'react';
-import { Div, Text, Button, Anchor } from 'atomize';
+import { Div, Text, Button } from 'atomize';
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
   return (
@@ -19,21 +20,21 @@ function LandingPage() {
 
         {/* Navigation Links */}
         <Div d="flex">
-          <Anchor href="/" textColor="black" m={{ r: "1.5rem" }}>
+          <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Home
-          </Anchor>
-          <Anchor href="/" textColor="black" m={{ r: "1.5rem" }}>
+          </Link>
+          <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Problem Library
-          </Anchor>
-          <Anchor href="/" textColor="black" m={{ r: "1.5rem" }}>
+          </Link>
+          <Link to="/practice-mode" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Practice Mode
-          </Anchor>
-          <Anchor href="/github" textColor="black" m={{ r: "1.5rem" }}>
+          </Link>
+          <Link to="/duel" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Duel
-          </Anchor>
-          <Anchor href="/designers" textColor="black" m={{ r: "1.5rem" }}>
+          </Link>
+          <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Login or Signup
-          </Anchor>
+          </Link>
         </Div>
       </Div>
 
@@ -61,30 +62,30 @@ function LandingPage() {
         </Button>
       </Div>
 
-      {/* Footer */}
+      {/* Footer - - - // - - - */}
       <Div bg="gray100" p="3rem" d="flex" justify="space-between">
         <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Coderush</Text>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Features</Anchor>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Setup</Anchor>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Development</Anchor>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Features</Link>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Setup</Link>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Development</Link>
         </Div>
 
         <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Resources</Text>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Learn Java</Anchor>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Learn Java</Link>
         </Div>
 
         <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>About</Text>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Our Team</Anchor>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Contact</Anchor>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Our Team</Link>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Contact</Link>
         </Div>
 
         <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Extras</Text>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Help</Anchor>
-          <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Feedback</Anchor>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Help</Link>
+          <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Feedback</Link>
         </Div>
       </Div>
 
