@@ -1,3 +1,5 @@
+package com.coderush.user;
+
 public class User {
     // Attributes
     private String username;
@@ -12,6 +14,24 @@ public class User {
         this.emailAddress = emailAddress;
         this.isLoggedIn = false; // User starts as logged out
     }
+
+    // Getters
+    public String getUsername() {return username;}
+
+    public String getPassword() {return password;}
+
+    public String getEmailAddress() {return emailAddress;}
+
+    public boolean isLoggedIn() {return isLoggedIn;}
+
+    // Setters (optional depending on if you want to allow changing these)
+    public void setUsername(String username) {this.username = username;}
+
+    public void setPassword(String password) {this.password = password;}
+
+    public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
+
+    public void setLoggedIn(boolean loggedIn) {isLoggedIn = loggedIn;}
 
     // Methods
     public boolean register(String username, String password, String emailAddress) {
@@ -67,27 +87,5 @@ public class User {
         } else {
             System.out.println("Please log in to submit your solution.");
         }
-    }
-
-    // Getters
-    public String getUsername() {
-        return username;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    // Setters (optional depending on if you want to allow changing these)
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

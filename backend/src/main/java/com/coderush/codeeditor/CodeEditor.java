@@ -1,3 +1,5 @@
+package com.coderush.codeeditor;
+
 public class CodeEditor {
     // Attributes
     private String code;         // The code written by the user
@@ -10,6 +12,16 @@ public class CodeEditor {
         this.code = "";          // Initialize code as empty
         this.templateCode = "";  // Initialize template as empty
     }
+
+    // Getters
+    public String getCode() {return code;}
+    public String getLanguage() {return language;}
+    public String getTemplateCode() {return templateCode;}
+
+    // Setters
+    public void setCode(String code) {this.code = code;}
+    public void setLanguage(String language) {this.language = language;}
+    public void setTemplateCode(String templateCode) {this.templateCode = templateCode;}
 
     // Method to edit code
     public void editCode(String newCode) {
@@ -36,28 +48,5 @@ public class CodeEditor {
         this.templateCode = template;
         this.code = template; // Set the editor code to start with the template
         System.out.println("Template loaded into editor.");
-    }
-
-    // Getter and Setter for language
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    // Getter and Setter for code
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    // Getter for template code
-    public String getTemplateCode() {
-        return templateCode;
     }
 }

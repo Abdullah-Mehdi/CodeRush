@@ -1,10 +1,14 @@
+package com.coderush.problem;
+
+import java.util.*;
+
 public class Problem {
     // Attributes
-    private String id = "";
-    private String title = "";
-    private String description = "";
-    private String difficulty = "";
-    private List<Object[]> testCases = {};
+    private String id;
+    private String title;
+    private String description;
+    private String difficulty;
+    private List<Object[]> testCases;
     // Constructor
     public Problem(String description, String title, String id, String difficulty, List<Object[]> testCases) {
         this.description = description;
@@ -14,6 +18,7 @@ public class Problem {
         this.testCases = testCases;
     }
 
+    // Setters
     public void setId(String id) {this.id = id;}
 
     public void setTitle(String title) {this.title = title;}
@@ -24,24 +29,14 @@ public class Problem {
 
     public void setTestCases(List<Object[]> testCases) {this.testCases = testCases;}
 
-    public void setTarget(int target) {this.target = target;}
-
     // Getters
     public String getId() {return id;}
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() {return title;}
 
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() {return description;}
 
-    public String getDifficulty() {
-        return difficulty;
-    }
+    public String getDifficulty() {return difficulty;}
 
-    public List<Object[]> getTestCases() {
-        return testCases;
-    }
+    public List<Object[]> getTestCases() {return testCases;}
 }
