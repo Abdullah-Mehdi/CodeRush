@@ -1,17 +1,27 @@
 package com.coderush.user;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     // Attributes
     private String username;
     private String password;
-    private String emailAddress;
+    private String email;
     private boolean isLoggedIn;
 
+    public User() {}
+
     // Constructor
-    public User(String username, String password, String emailAddress) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
-        this.emailAddress = emailAddress;
+        this.email = email;
         this.isLoggedIn = false; // User starts as logged out
     }
 
@@ -20,7 +30,7 @@ public class User {
 
     public String getPassword() {return password;}
 
-    public String getEmailAddress() {return emailAddress;}
+    public String getEmail() {return email;}
 
     public boolean isLoggedIn() {return isLoggedIn;}
 
@@ -29,12 +39,12 @@ public class User {
 
     public void setPassword(String password) {this.password = password;}
 
-    public void setEmailAddress(String emailAddress) {this.emailAddress = emailAddress;}
+    public void setEmail(String email) {this.email = email;}
 
     public void setLoggedIn(boolean loggedIn) {isLoggedIn = loggedIn;}
 
     // Methods
-    public boolean register(String username, String password, String emailAddress) {
+    public boolean register(String username, String password, String email) {
         // Assume a registration system that checks if the user already exists
         // Here we would normally interact with a database or system storage.
         System.out.println("User " + username + " registered successfully.");

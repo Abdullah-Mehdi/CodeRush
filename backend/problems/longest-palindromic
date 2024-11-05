@@ -1,4 +1,0 @@
-id: 5;
-title: "Longest Palindromic Substring";
-description: "Given a string s, return the longest palindromic substring in s."
-difficulty: "Medium";
