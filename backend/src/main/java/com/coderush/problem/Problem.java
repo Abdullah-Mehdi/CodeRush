@@ -4,22 +4,23 @@ import java.util.*;
 
 public class Problem {
     // Attributes
-    private String id;
+    private Integer id;
     private String title;
     private String description;
     private String difficulty;
+    private String template;
     private List<Object[]> testCases;
     // Constructor
-    public Problem(String description, String title, String id, String difficulty, List<Object[]> testCases) {
-        this.description = description;
-        this.title = title;
+    public Problem() {}
+    public Problem(Integer id, String title, String description, String difficulty) {
         this.id = id;
+        this.title = title;
+        this.description = description;
         this.difficulty = difficulty;
-        this.testCases = testCases;
     }
 
     // Setters
-    public void setId(String id) {this.id = id;}
+    public void setId(Integer id) {this.id = id;}
 
     public void setTitle(String title) {this.title = title;}
 
@@ -27,16 +28,20 @@ public class Problem {
 
     public void setDifficulty(String difficulty) {this.difficulty = difficulty;}
 
+    public void setTemplate(String template) {this.template = template;}
+
     public void setTestCases(List<Object[]> testCases) {this.testCases = testCases;}
 
     // Getters
-    public String getId() {return id;}
+    public Integer getId() {return id;}
 
     public String getTitle() {return title;}
 
     public String getDescription() {return description;}
 
     public String getDifficulty() {return difficulty;}
+
+    public String getTemplate() {return template;}
 
     public List<Object[]> getTestCases() {return testCases;}
 }

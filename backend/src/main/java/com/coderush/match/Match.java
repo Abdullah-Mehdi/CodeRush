@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Match {
     // Attributes
+    private Integer id;
     private List<User> users;        // List of users participating in the match
     private Problem problem;         // The problem assigned to the match
     private Timer timer;             // Timer for match duration
@@ -25,6 +26,8 @@ public class Match {
     }
 
     // Getters
+    public Integer getId() {return id;}
+
     public List<User> getUsers() {return users;}
 
     public Problem getProblem() {return problem;}
@@ -46,49 +49,7 @@ public class Match {
 
     public void setMatchActive(boolean matchActive) {isMatchActive = matchActive;}
 
-    // Start the match
-    public void startMatch() {
-        if (!isMatchActive) {
-            isMatchActive = true;
-            System.out.println("Match started between " + users.get(0).getUsername() + " and " + users.get(1).getUsername() + ".");
-            System.out.println("Problem: " + problem.getTitle());
-            startTimer();
-        } else {
-            System.out.println("Match is already active.");
-        }
-    }
 
-    // End the match
-    public void endMatch() {
-        if (isMatchActive) {
-            isMatchActive = false;
-            timer.cancel();
-            System.out.println("Match ended between " + users.get(0).getUsername() + " and " + users.get(1).getUsername() + ".");
-            calculateWinner();
-        } else {
-            System.out.println("Match is not active.");
-        }
-    }
-
-    // Calculate the winner based on the solution submissions (dummy implementation)
-    public void calculateWinner() {
-        System.out.println("Calculating winner...");
-        // Placeholder: real implementation would involve comparing solution accuracy and timing
-        // Here we could simulate a winner
-        User winner = users.get(0);  // Placeholder logic: always selects the first user as winner
-        System.out.println("Winner is: " + winner.getUsername());
-    }
-
-    // Start the timer for the match
-    private void startTimer() {
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("Time's up! Ending match.");
-                endMatch();
-            }
-        }, matchDuration);
-    }
 
 
 }

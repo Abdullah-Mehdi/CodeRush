@@ -2,3 +2,8 @@
 Palindrome Number
 Given an integer x, return true if x is a palindrome, and false otherwise.
 Easy
+class Solution {
+    public boolean isPalindrome(int x) {
+
+    }
+}
