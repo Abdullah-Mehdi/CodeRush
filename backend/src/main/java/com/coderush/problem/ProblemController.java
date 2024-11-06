@@ -1,6 +1,7 @@
 package com.coderush.problem;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +23,15 @@ public class ProblemController {
         return problemService.getProblems();
     }
 
-    @GetMapping("/{title}")
-    public Optional<Problem> getProblemByTitle(@PathVariable("title") String title) {
-        return problemService.getProblemByTitle(title);
+    @GetMapping("/{id}")
+    public Optional<Problem> getProblemById(@PathVariable("id") Integer id) {
+        return problemService.getProblemById(id);
     }
+
+    @GetMapping("/{id}/template")
+    public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {
+        String template = problemService.getProblemTemplate(id);
+        return ResponseEntity.ok(template);  // Return the problem template as a string
+    }
+
 }

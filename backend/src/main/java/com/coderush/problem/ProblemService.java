@@ -3,7 +3,7 @@ package com.coderush.problem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 import java.util.Optional;
 
 @Service
@@ -20,7 +20,14 @@ public class ProblemService {
         return (List<Problem>) problemRepository.findAll();
     }
 
-    public Optional<Problem> getProblemByTitle(String title) {
-        return problemRepository.findProblemByTitle(title);
+    public Optional<Problem> getProblemById(Integer id) {
+        return problemRepository.findProblemById(id);
     }
+
+    public String getProblemTemplate(Integer problemId) {
+        Problem problem = problemRepository.findProblemById(problemId)
+                .orElseThrow(() -> new RuntimeException("Problem not found"));
+        return problem.getTemplate();  // Return the code template for the problem
+    }
+
 }

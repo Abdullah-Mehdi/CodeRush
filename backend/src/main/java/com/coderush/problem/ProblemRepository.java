@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ProblemRepository extends CrudRepository<Problem, Integer> {
 
-    @Query("SELECT p FROM Problem p WHERE p.title = ?1")
-    Optional<Problem> findProblemByTitle(String title);
+    @Query("SELECT p FROM Problem p WHERE p.id = ?1")
+    Optional<Problem> findProblemById(Integer id);
 }

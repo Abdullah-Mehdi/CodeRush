@@ -12,11 +12,12 @@ public class Problem {
     private List<Object[]> testCases;
     // Constructor
     public Problem() {}
-    public Problem(Integer id, String title, String description, String difficulty) {
+    public Problem(Integer id, String title, String description, String difficulty, String template) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.difficulty = difficulty;
+        this.template = template;
     }
 
     // Setters

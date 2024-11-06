@@ -48,8 +48,4 @@ public class Match {
     public void setMatchDuration(long matchDuration) {this.matchDuration = matchDuration;}
 
     public void setMatchActive(boolean matchActive) {isMatchActive = matchActive;}
-
-
-
-
 }
