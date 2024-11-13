@@ -13,10 +13,10 @@ import java.util.List;
 
 @Controller
 public class AuthController {
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
     }
 
