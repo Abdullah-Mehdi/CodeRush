@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.Optional;
 
 @Service
 public class ProblemService {
@@ -29,5 +28,4 @@ public class ProblemService {
                 .orElseThrow(() -> new RuntimeException("Problem not found"));
         return problem.getTemplate();  // Return the code template for the problem
     }
-
 }

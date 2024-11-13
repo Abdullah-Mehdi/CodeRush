@@ -24,14 +24,18 @@ public class ProblemController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Problem> getProblemById(@PathVariable("id") Integer id) {
-        return problemService.getProblemById(id);
+    public ResponseEntity<Problem> getProblemById(@PathVariable("id") Integer id) {
+        Optional<Problem> problem = problemService.getProblemById(id);
+        return problem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/template")
     public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {
         String template = problemService.getProblemTemplate(id);
-        return ResponseEntity.ok(template);  // Return the problem template as a string
+        if (template != null) {
+            return ResponseEntity.ok(template);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-
 }

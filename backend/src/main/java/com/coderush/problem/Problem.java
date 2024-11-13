@@ -1,15 +1,24 @@
 package com.coderush.problem;
 
+import com.coderush.testcase.TestCase;
+import jakarta.persistence.*;
+
 import java.util.*;
 
+@Entity
+@Table
 public class Problem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     // Attributes
     private Integer id;
     private String title;
     private String description;
     private String difficulty;
     private String template;
-    private List<Object[]> testCases;
+
+    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TestCase> testCases = new ArrayList<>();
     // Constructor
     public Problem() {}
     public Problem(Integer id, String title, String description, String difficulty, String template) {
@@ -31,7 +40,7 @@ public class Problem {
 
     public void setTemplate(String template) {this.template = template;}
 
-    public void setTestCases(List<Object[]> testCases) {this.testCases = testCases;}
+    public void setTestCases(List<TestCase> testCases) {this.testCases = testCases;}
 
     // Getters
     public Integer getId() {return id;}
@@ -44,5 +53,5 @@ public class Problem {
 
     public String getTemplate() {return template;}
 
-    public List<Object[]> getTestCases() {return testCases;}
+    public List<TestCase> getTestCases() {return testCases;}
 }
