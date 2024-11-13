@@ -1,47 +1,40 @@
 package com.coderush.user;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    // Attributes
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String username;
     private String password;
     private String email;
     private boolean isLoggedIn;
 
-    public User() {}
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private List<Role> roles = new ArrayList<>();
 
-    // Constructor
-    public User(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.isLoggedIn = false; // User starts as logged out
-    }
-    // Getters
-    public Integer getId() {return id;}
-
-    public String getUsername() {return username;}
-
-    public String getPassword() {return password;}
-
-    public String getEmail() {return email;}
 
     public boolean isLoggedIn() {return isLoggedIn;}
 
-    // Setters (optional depending on if you want to allow changing these)
-    public void setId(Integer id) {this.id = id;}
-
-    public void setUsername(String username) {this.username = username;}
-
-    public void setPassword(String password) {this.password = password;}
-
-    public void setEmail(String email) {this.email = email;}
 
     public void setLoggedIn(boolean loggedIn) {isLoggedIn = loggedIn;}
 }
