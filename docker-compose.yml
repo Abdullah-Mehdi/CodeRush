@@ -1,11 +1,22 @@
+# version: '3'
+# services:
+#   frontend:
+#     build: 
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - db
+
 version: '3'
 services:
   frontend:
-    build: 
-      context: ./frontend
+    build:
+      context: ./frontend-final
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - db
 
