@@ -1,14 +1,15 @@
 package com.coderush.solution;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Solution {
     private String code;
 
-    // Constructor
-    public Solution(String code) {this.code = code;}
-
-    // Setter
-    public void setCode(String code) {this.code = code;}
-
-    // Getter
-    public String getCode() {return code;}
 }
