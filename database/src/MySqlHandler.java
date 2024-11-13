@@ -1,5 +1,6 @@
+import java.io.FileReader;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Handles all interactions with the aiven mysql database.
@@ -526,21 +527,21 @@ public class MySqlHandler {
 
 
     private static boolean connectToDatabase(){
-        String host, port, databaseName, userName, password;
-        host = "mysql-gmu-321-gmu-04bc.l.aivencloud.com";
-        port = "24991";
-        databaseName = "justwork";
-        userName = "autosystemuser1";
-        password = "AVNS_CCWHBKO2wym_z2vDVpG";
+        FileReader reader;
+        Properties p;
+        try{
+            reader = new FileReader(".\\database\\sqlconfig.properties");
+            p = new Properties();
+            p.load(reader);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
-//        host = "localhost";
-//        port = "3306";
-//        databaseName = "justwork";
-//        userName = "root";
-//        password = "BoDHNJp2oy9sQHpAumPU+";
 
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + databaseName + "?sslmode=require", userName, password);
+            connection = DriverManager.getConnection("jdbc:mysql://" + p.getProperty("host") + ":" + p.getProperty("port") + "/" + p.getProperty("databaseName") + "?sslmode=require", p.getProperty("userName"), p.getProperty("password"));
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT version() AS version");
 
