@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1" date="1731381553671" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 11/11/2024 10:18 PM [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/codeeditor/CodeEditor.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/codeeditor/CodeEditor.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/CodeEditor.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/user/User.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/user/User.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/User.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/user/UserService.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/user/UserService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/UserService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/user/UserController.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/user/UserController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/UserController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/problem/Problem.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/problem/Problem.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/Problem.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/user/UserRepository.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/user/UserRepository.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/UserRepository.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="backend/target/classes/com/coderush/match/Match.class" />
+    <option name="AFTER_PATH" value="backend/target/classes/com/coderush/match/Match.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_11_2024_10_18_PM_[Changes]1/Match.class" />
+  </binary>
+</changelist>

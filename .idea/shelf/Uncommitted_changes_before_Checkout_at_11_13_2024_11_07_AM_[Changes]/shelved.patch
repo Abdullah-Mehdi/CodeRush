@@ -1,0 +1,414 @@
+Index: backend/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=CodeRush\r\n
+===================================================================
+diff --git a/backend/src/main/resources/application.properties b/backend/src/main/resources/application.properties
+--- a/backend/src/main/resources/application.properties	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/resources/application.properties	(date 1731388384933)
+@@ -1,1 +1,2 @@
+ spring.application.name=CodeRush
++spring.jpa.hibernate.ddl-auto=update
+Index: backend/src/main/java/com/coderush/problem/Problem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coderush.problem;\r\n\r\nimport java.util.*;\r\n\r\npublic class Problem {\r\n    // Attributes\r\n    private Integer id;\r\n    private String title;\r\n    private String description;\r\n    private String difficulty;\r\n    private String template;\r\n    private List<Object[]> testCases;\r\n    // Constructor\r\n    public Problem() {}\r\n    public Problem(Integer id, String title, String description, String difficulty, String template) {\r\n        this.id = id;\r\n        this.title = title;\r\n        this.description = description;\r\n        this.difficulty = difficulty;\r\n        this.template = template;\r\n    }\r\n\r\n    // Setters\r\n    public void setId(Integer id) {this.id = id;}\r\n\r\n    public void setTitle(String title) {this.title = title;}\r\n\r\n    public void setDescription(String description) {this.description = description;}\r\n\r\n    public void setDifficulty(String difficulty) {this.difficulty = difficulty;}\r\n\r\n    public void setTemplate(String template) {this.template = template;}\r\n\r\n    public void setTestCases(List<Object[]> testCases) {this.testCases = testCases;}\r\n\r\n    // Getters\r\n    public Integer getId() {return id;}\r\n\r\n    public String getTitle() {return title;}\r\n\r\n    public String getDescription() {return description;}\r\n\r\n    public String getDifficulty() {return difficulty;}\r\n\r\n    public String getTemplate() {return template;}\r\n\r\n    public List<Object[]> getTestCases() {return testCases;}\r\n}\r\n
+===================================================================
+diff --git a/backend/src/main/java/com/coderush/problem/Problem.java b/backend/src/main/java/com/coderush/problem/Problem.java
+--- a/backend/src/main/java/com/coderush/problem/Problem.java	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/java/com/coderush/problem/Problem.java	(date 1731388783247)
+@@ -1,8 +1,14 @@
+ package com.coderush.problem;
+ 
++import jakarta.persistence.*;
++
+ import java.util.*;
+ 
++@Entity
++@Table
+ public class Problem {
++    @Id
++    @GeneratedValue(strategy = GenerationType.AUTO)
+     // Attributes
+     private Integer id;
+     private String title;
+Index: backend/src/main/java/com/coderush/problem/ProblemController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coderush.problem;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@RestController\r\n@RequestMapping(path = \"api/v1/problem\")\r\npublic class ProblemController {\r\n\r\n    private final ProblemService problemService;\r\n\r\n    @Autowired\r\n    public ProblemController(ProblemService problemService) {\r\n        this.problemService = problemService;\r\n    }\r\n\r\n    @GetMapping\r\n    public List<Problem> getProblems() {\r\n        return problemService.getProblems();\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public Optional<Problem> getProblemById(@PathVariable(\"id\") Integer id) {\r\n        return problemService.getProblemById(id);\r\n    }\r\n\r\n    @GetMapping(\"/{id}/template\")\r\n    public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {\r\n        String template = problemService.getProblemTemplate(id);\r\n        return ResponseEntity.ok(template);  // Return the problem template as a string\r\n    }\r\n\r\n}
+===================================================================
+diff --git a/backend/src/main/java/com/coderush/problem/ProblemController.java b/backend/src/main/java/com/coderush/problem/ProblemController.java
+--- a/backend/src/main/java/com/coderush/problem/ProblemController.java	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/java/com/coderush/problem/ProblemController.java	(date 1731389922710)
+@@ -19,17 +19,17 @@
+     }
+ 
+     @GetMapping
+-    public List<Problem> getProblems() {
++    public @ResponseBody List<Problem> getProblems() {
+         return problemService.getProblems();
+     }
+ 
+     @GetMapping("/{id}")
+-    public Optional<Problem> getProblemById(@PathVariable("id") Integer id) {
++    public @ResponseBody Optional<Problem> getProblemById(@PathVariable("id") Integer id) {
+         return problemService.getProblemById(id);
+     }
+ 
+     @GetMapping("/{id}/template")
+-    public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {
++    public @ResponseBody ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {
+         String template = problemService.getProblemTemplate(id);
+         return ResponseEntity.ok(template);  // Return the problem template as a string
+     }
+Index: backend/src/main/java/com/coderush/problem/ProblemRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coderush.problem;\r\n\r\nimport org.springframework.data.jpa.repository.Query;\r\nimport org.springframework.data.repository.CrudRepository;\r\nimport org.springframework.stereotype.Repository;\r\n\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface ProblemRepository extends CrudRepository<Problem, Integer> {\r\n\r\n    @Query(\"SELECT p FROM Problem p WHERE p.id = ?1\")\r\n    Optional<Problem> findProblemById(Integer id);\r\n}\r\n
+===================================================================
+diff --git a/backend/src/main/java/com/coderush/problem/ProblemRepository.java b/backend/src/main/java/com/coderush/problem/ProblemRepository.java
+--- a/backend/src/main/java/com/coderush/problem/ProblemRepository.java	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/java/com/coderush/problem/ProblemRepository.java	(date 1731389922714)
+@@ -11,4 +11,6 @@
+ 
+     @Query("SELECT p FROM Problem p WHERE p.id = ?1")
+     Optional<Problem> findProblemById(Integer id);
++
+ }
++
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a0ceb1f2-c90f-4a04-bdc2-5b84a5686b39\" name=\"Changes\" comment=\"Controller, services updated\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Interface\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <favorite-branches>\r\n      <branch-storage>\r\n        <map>\r\n          <entry type=\"REMOTE\">\r\n            <value>\r\n              <list>\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"origin/database\" />\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"origin/backend\" />\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"origin/docker-test\" />\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"origin/frontend-final\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n        </map>\r\n      </branch-storage>\r\n    </favorite-branches>\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;denkyirahh&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/Abdullah-Mehdi/CodeRush.git&quot;,\r\n    &quot;accountId&quot;: &quot;9364fe6e-391d-48ba-a577-69dff1dbb8d8&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProblemsViewState\">\r\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2o9xfJg3bpl8ovK5whAYqatxttF\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.CodeRushApplication.executor\": \"Run\",\r\n    \"Docker.docker-compose.yml.db: Compose Deployment.executor\": \"Run\",\r\n    \"Docker.docker-compose.yml: Compose Deployment.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"backend\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/asoma/IdeaProjects/CodeRush\",\r\n    \"onboarding.tips.debug.path\": \"C:/Users/asoma/IdeaProjects/CodeRush/backend/User/src/Main.java\",\r\n    \"project.structure.last.edited\": \"Modules\",\r\n    \"project.structure.proportion\": \"0.15\",\r\n    \"project.structure.side.proportion\": \"0.2\",\r\n    \"settings.editor.selected.configurable\": \"project.propVCSSupport.DirectoryMappings\"\r\n  },\r\n  \"keyToStringList\": {\r\n    \"com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File\": [\r\n      \"JAVA\",\r\n      \"Markdown\"\r\n    ]\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\asoma\\IdeaProjects\\CodeRush\\backend\\src\\main\\resources\" />\r\n      <recent name=\"C:\\Users\\asoma\\IdeaProjects\\CodeRush\\backend\" />\r\n      <recent name=\"C:\\Users\\asoma\\IdeaProjects\\CodeRush\" />\r\n      <recent name=\"C:\\Users\\asoma\\IdeaProjects\\CodeRush\\backend\\solutions\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Docker.docker-compose.yml: Compose Deployment\">\r\n    <configuration name=\"CodeRushApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.coderush.CodeRushApplication\" />\r\n      <module name=\"CodeRush\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.coderush.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings />\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"docker-compose.yml: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"sourceFilePath\" value=\"docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"docker-compose.yml.db: Compose Deployment\" type=\"docker-deploy\" factoryName=\"docker-compose.yml\" temporary=\"true\" server-name=\"Docker\">\r\n      <deployment type=\"docker-compose.yml\">\r\n        <settings>\r\n          <option name=\"services\">\r\n            <list>\r\n              <option value=\"db\" />\r\n            </list>\r\n          </option>\r\n          <option name=\"sourceFilePath\" value=\"docker-compose.yml\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Docker.docker-compose.yml: Compose Deployment\" />\r\n        <item itemvalue=\"Application.CodeRushApplication\" />\r\n        <item itemvalue=\"Docker.docker-compose.yml.db: Compose Deployment\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a0ceb1f2-c90f-4a04-bdc2-5b84a5686b39\" name=\"Changes\" comment=\"\" />\r\n      <created>1730295694302</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1730295694302</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added backend folder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730297322778</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730297322778</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Added backend folder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730433985534</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730433985534</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Added backend classes\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730522959383</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730522959383</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Backend file\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730555261896</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730555261896</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"added problem files\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730760753718</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730760753718</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"added Spring Boot\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730767777059</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730767777059</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Added user controller and services, moved problems to resources folder\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730828892893</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730828892893</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Added code template for problems, updated controllers, services, and etc\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730852619468</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730852619468</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Controller, services updated\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1730865593664</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1730865593664</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"10\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"RECENT_FILTERS\">\r\n      <map>\r\n        <entry key=\"Branch\">\r\n          <value>\r\n            <list>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"origin/database\" />\r\n                </option>\r\n              </RecentGroup>\r\n              <RecentGroup>\r\n                <option name=\"FILTER_VALUES\">\r\n                  <option value=\"origin/frontend\" />\r\n                </option>\r\n              </RecentGroup>\r\n            </list>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"CUSTOM_BOOLEAN_PROPERTIES\">\r\n                <map>\r\n                  <entry key=\"Show.Git.Branches\" value=\"true\" />\r\n                </map>\r\n              </option>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/database\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added backend folder\" />\r\n    <MESSAGE value=\"Added backend classes\" />\r\n    <MESSAGE value=\"Backend file\" />\r\n    <MESSAGE value=\"added problem files\" />\r\n    <MESSAGE value=\"added Spring Boot\" />\r\n    <MESSAGE value=\"Added user controller and services, moved problems to resources folder\" />\r\n    <MESSAGE value=\"Added code template for problems, updated controllers, services, and etc\" />\r\n    <MESSAGE value=\"Controller, services updated\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Controller, services updated\" />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/backend/User/src/Main.java</url>\r\n          <line>11</line>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/.idea/workspace.xml	(date 1731389922806)
+@@ -4,7 +4,31 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a0ceb1f2-c90f-4a04-bdc2-5b84a5686b39" name="Changes" comment="Controller, services updated" />
++    <list default="true" id="a0ceb1f2-c90f-4a04-bdc2-5b84a5686b39" name="Changes" comment="Controller, services updated">
++      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/Problem.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/Problem.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemRepository.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/application.properties" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/codeeditor/CodeEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/codeeditor/CodeEditor.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/match/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/match/Match.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/problem/Problem.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/problem/Problem.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/User.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserController.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserRepository.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/coderush/user/UserService.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/README.md" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/add-two-numbers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/add-two-numbers.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/longest-common-prefix.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/longest-common-prefix.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/longest-palindromic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/longest-palindromic.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/longest-substring.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/longest-substring.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/median-two-arrays.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/median-two-arrays.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/palindrome-number.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/palindrome-number.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/reg-express-match.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/reg-express-match.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/backend/target/classes/problems/two-sum.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/problems/two-sum.txt" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -68,30 +92,30 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.CodeRushApplication.executor": "Run",
+-    "Docker.docker-compose.yml.db: Compose Deployment.executor": "Run",
+-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "backend",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/asoma/IdeaProjects/CodeRush",
+-    "onboarding.tips.debug.path": "C:/Users/asoma/IdeaProjects/CodeRush/backend/User/src/Main.java",
+-    "project.structure.last.edited": "Modules",
+-    "project.structure.proportion": "0.15",
+-    "project.structure.side.proportion": "0.2",
+-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.CodeRushApplication.executor&quot;: &quot;Run&quot;,
++    &quot;Docker.docker-compose.yml.db: Compose Deployment.executor&quot;: &quot;Run&quot;,
++    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/asoma/IdeaProjects/CodeRush&quot;,
++    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/asoma/IdeaProjects/CodeRush/backend/User/src/Main.java&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
+   },
+-  "keyToStringList": {
+-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+-      "JAVA",
+-      "Markdown"
++  &quot;keyToStringList&quot;: {
++    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
++      &quot;JAVA&quot;,
++      &quot;Markdown&quot;
+     ]
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources" />
+@@ -100,7 +124,7 @@
+       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\solutions" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
++  <component name="RunManager" selected="Application.CodeRushApplication">
+     <configuration name="CodeRushApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+       <option name="MAIN_CLASS_NAME" value="com.coderush.CodeRushApplication" />
+       <module name="CodeRush" />
+@@ -143,8 +167,8 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+         <item itemvalue="Application.CodeRushApplication" />
++        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+         <item itemvalue="Docker.docker-compose.yml.db: Compose Deployment" />
+       </list>
+     </recent_temporary>
+@@ -300,6 +324,10 @@
+           <line>11</line>
+           <option name="timeStamp" value="1" />
+         </line-breakpoint>
++        <breakpoint enabled="true" type="java-exception">
++          <properties class="java.lang.NullPointerException" package="java.lang" />
++          <option name="timeStamp" value="2" />
++        </breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
+   </component>
+Index: backend/target/classes/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=CodeRush\r\nspring.jpa.hibernate.ddl-auto=update\r\nspring.datasource.url=jdbc:mysql://localhost:3306/coderush\r\nspring.datasource.username=\r\nspring.datasource.password=\r\nspring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver\r\nspring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect\r\nspring.jpa.show-sql: true
+===================================================================
+diff --git a/backend/target/classes/application.properties b/backend/target/classes/application.properties
+--- a/backend/target/classes/application.properties	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/application.properties	(date 1731388385176)
+@@ -1,8 +1,2 @@
+ spring.application.name=CodeRush
+ spring.jpa.hibernate.ddl-auto=update
+-spring.datasource.url=jdbc:mysql://localhost:3306/coderush
+-spring.datasource.username=
+-spring.datasource.password=
+-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+-spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+-spring.jpa.show-sql: true
+\ No newline at end of file
+Index: backend/target/classes/problems/longest-common-prefix.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>14\r\nLongest Common Prefix\r\nWrite a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string \"\".\r\nEasy
+===================================================================
+diff --git a/backend/target/classes/problems/longest-common-prefix.txt b/backend/target/classes/problems/longest-common-prefix.txt
+--- a/backend/target/classes/problems/longest-common-prefix.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/longest-common-prefix.txt	(date 1731382193335)
+@@ -1,4 +1,9 @@
+ 14
+ Longest Common Prefix
+ Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+-Easy
+\ No newline at end of file
++Easy
++class Solution {
++    public String longestCommonPrefix(String[] strs) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/longest-palindromic.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>5\r\nLongest Palindromic Substring\r\nGiven a string s, return the longest palindromic substring in s.\r\nMedium
+===================================================================
+diff --git a/backend/target/classes/problems/longest-palindromic.txt b/backend/target/classes/problems/longest-palindromic.txt
+--- a/backend/target/classes/problems/longest-palindromic.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/longest-palindromic.txt	(date 1731382193335)
+@@ -1,4 +1,9 @@
+ 5
+ Longest Palindromic Substring
+ Given a string s, return the longest palindromic substring in s.
+-Medium
+\ No newline at end of file
++Medium
++class Solution {
++    public String longestPalindrome(String s) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/add-two-numbers.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>2\r\nAdd Two Numbers\r\nYou are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself.\r\nMedium
+===================================================================
+diff --git a/backend/target/classes/problems/add-two-numbers.txt b/backend/target/classes/problems/add-two-numbers.txt
+--- a/backend/target/classes/problems/add-two-numbers.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/add-two-numbers.txt	(date 1731382193334)
+@@ -1,4 +1,19 @@
+ 2
+ Add Two Numbers
+ You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+-Medium
+\ No newline at end of file
++Medium
++/**
++ * Definition for singly-linked list.
++ * public class ListNode {
++ *     int val;
++ *     ListNode next;
++ *     ListNode() {}
++ *     ListNode(int val) { this.val = val; }
++ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
++ * }
++ */
++class Solution {
++    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/palindrome-number.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>9\r\nPalindrome Number\r\nGiven an integer x, return true if x is a palindrome, and false otherwise.\r\nEasy
+===================================================================
+diff --git a/backend/target/classes/problems/palindrome-number.txt b/backend/target/classes/problems/palindrome-number.txt
+--- a/backend/target/classes/problems/palindrome-number.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/palindrome-number.txt	(date 1731382193336)
+@@ -1,4 +1,9 @@
+ 9
+ Palindrome Number
+ Given an integer x, return true if x is a palindrome, and false otherwise.
+-Easy
+\ No newline at end of file
++Easy
++class Solution {
++    public boolean isPalindrome(int x) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>1. First line is id of the problem\r\n2. Second is title\r\n3. Third is description\r\n4. Fourth is difficulty
+===================================================================
+diff --git a/backend/target/classes/problems/README.md b/backend/target/classes/problems/README.md
+--- a/backend/target/classes/problems/README.md	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/README.md	(date 1731382193334)
+@@ -1,4 +1,5 @@
+ 1. First line is id of the problem
+ 2. Second is title
+ 3. Third is description
+-4. Fourth is difficulty
+\ No newline at end of file
++4. Fourth is difficulty
++5. Fifth and so on is the code template
+\ No newline at end of file
+Index: backend/target/classes/problems/longest-substring.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>3\r\nLongest Substring Without Repeating Characters\r\nGiven a string s, find the length of the longest substring without repeating characters.\r\nMedium
+===================================================================
+diff --git a/backend/target/classes/problems/longest-substring.txt b/backend/target/classes/problems/longest-substring.txt
+--- a/backend/target/classes/problems/longest-substring.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/longest-substring.txt	(date 1731382193335)
+@@ -1,4 +1,9 @@
+ 3
+ Longest Substring Without Repeating Characters
+ Given a string s, find the length of the longest substring without repeating characters.
+-Medium
+\ No newline at end of file
++Medium
++class Solution {
++    public int lengthOfLongestSubstring(String s) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/median-two-arrays.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>4\r\nMedian of Two Sorted Arrays\r\nGiven two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\r\nHard
+===================================================================
+diff --git a/backend/target/classes/problems/median-two-arrays.txt b/backend/target/classes/problems/median-two-arrays.txt
+--- a/backend/target/classes/problems/median-two-arrays.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/median-two-arrays.txt	(date 1731382193336)
+@@ -1,4 +1,9 @@
+ 4
+ Median of Two Sorted Arrays
+ Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.
+-Hard
+\ No newline at end of file
++Hard
++class Solution {
++    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/reg-express-match.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>10\r\nRegular Expression Matching\r\nGiven an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where: '.' Matches any single character. '*' Matches zero or more of the preceding element. The matching should cover the entire input string (not partial).\r\nHard
+===================================================================
+diff --git a/backend/target/classes/problems/reg-express-match.txt b/backend/target/classes/problems/reg-express-match.txt
+--- a/backend/target/classes/problems/reg-express-match.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/reg-express-match.txt	(date 1731382193336)
+@@ -1,4 +1,9 @@
+ 10
+ Regular Expression Matching
+ Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where: '.' Matches any single character. '*' Matches zero or more of the preceding element. The matching should cover the entire input string (not partial).
+-Hard
+\ No newline at end of file
++Hard
++class Solution {
++    public boolean isMatch(String s, String p) {
++
++    }
++}
+\ No newline at end of file
+Index: backend/target/classes/problems/two-sum.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>1\r\nTwo Sum\r\nGiven an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.\r\nEasy
+===================================================================
+diff --git a/backend/target/classes/problems/two-sum.txt b/backend/target/classes/problems/two-sum.txt
+--- a/backend/target/classes/problems/two-sum.txt	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/target/classes/problems/two-sum.txt	(date 1731382193336)
+@@ -1,4 +1,9 @@
+ 1
+ Two Sum
+ Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+-Easy
+\ No newline at end of file
++Easy
++class Solution {
++    public int[] twoSum(int[] nums, int target) {
++
++    }
++}
+\ No newline at end of file
