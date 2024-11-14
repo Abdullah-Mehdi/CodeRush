@@ -26,12 +26,14 @@ function Duel() {
                     <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Problem Library
                     </Link>
+                    {/*
                     <Link to="/practice-mode" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Practice Mode
                     </Link>
                     <Link to="/duel" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Duel
                     </Link>
+                    */}
                     <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Login or Signup
                     </Link>

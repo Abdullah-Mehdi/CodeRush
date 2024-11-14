@@ -1,5 +1,5 @@
 import React from 'react';
-import { Div, Text, Button } from 'atomize';
+import { Div, Text, Button, Anchor, Icon } from 'atomize';
 import { Link } from 'react-router-dom';
 
 function LandingPage() {
@@ -26,12 +26,14 @@ function LandingPage() {
           <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Problem Library
           </Link>
+          {/*
           <Link to="/practice-mode" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Practice Mode
           </Link>
           <Link to="/duel" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Duel
           </Link>
+          */}
           <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Login or Signup
           </Link>
@@ -51,38 +53,40 @@ function LandingPage() {
         </Text>
 
         {/* Get Started Button */}
-        <Button
-          bg="info700"
-          hoverBg="info800"
-          textColor="white"
-          p={{ x: "2rem", y: "0.75rem" }}
-          rounded="md"
-        >
-          Let’s Duel
-        </Button>
+        <Link to="/problem-library" style={{ textDecoration: 'none' }}>
+          <Button
+            bg="info700"
+            hoverBg="info800"
+            textColor="white"
+            p={{ x: "2rem", y: "0.75rem" }}
+            rounded="md"
+          >
+            Get Started
+          </Button>
+        </Link>
       </Div>
 
       {/* Footer - - - // - - - */}
-      <Div bg="gray100" p="3rem" d="flex" justify="space-between">
-        <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+      <Div bg="gray100" p="3rem" d="flex" justify="space-between" position="fixed" >
+        <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Coderush</Text>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Features</Link>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Setup</Link>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Development</Link>
         </Div>
 
-        <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+        <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Resources</Text>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Learn Java</Link>
         </Div>
 
-        <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+        <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>About</Text>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Our Team</Link>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Contact</Link>
         </Div>
 
-        <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+        <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
           <Text textSize="title" m={{ b: "1rem" }}>Extras</Text>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Help</Link>
           <Link to="/" style={{ color: 'black', marginBottom: '0.5rem', textDecoration: 'none' }}>Feedback</Link>
