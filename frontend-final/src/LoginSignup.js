@@ -26,12 +26,14 @@ function LoginSignup() {
                     <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Problem Library
                     </Link>
+                    {/*
                     <Link to="/practice-mode" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Practice Mode
                     </Link>
                     <Link to="/duel" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Duel
                     </Link>
+                    */}
                     <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
                         Login or Signup
                     </Link>
@@ -46,7 +48,7 @@ function LoginSignup() {
                 </Text>
 
                 {/* Description */}
-                <Text textSize="subheader" textAlign="center" m={{ b: "2rem" }} maxW="30rem">
+                <Text textSize="subheader" textAlign="center" m={{ b: "0rem" }} maxW="30rem">
                     Access your account or create a new one to start coding and tracking your progress.
                 </Text>
             </Div>
