@@ -1,6 +1,58 @@
 import React from 'react';
-import { Div, Text, Anchor } from 'atomize';
+import { Div, Text, Anchor, Button } from 'atomize';
 import { Link } from 'react-router-dom';
+
+
+const mockProblems = [
+    {
+        id: 1,
+        title: "Two Sum",
+        description: "Return indices of two numbers that add up to a target value in an array.",
+        difficulty: "Easy",
+    },
+    {
+        id: 2,
+        title: "Longest Common Prefix",
+        description: "Find the longest common prefix string in an array of strings.",
+        difficulty: "Easy",
+    },
+    {
+        id: 3,
+        title: "Palindrome Number",
+        description: "Determine if a given integer is a palindrome.",
+        difficulty: "Easy",
+    },
+    {
+        id: 4,
+        title: "Add Two Numbers",
+        description: "Add two linked lists representing numbers and return the sum as a linked list.",
+        difficulty: "Medium",
+    },
+    {
+        id: 5,
+        title: "Longest Palindromic Substring",
+        description: "Return the longest palindromic substring in a given string.",
+        difficulty: "Medium",
+    },
+    {
+        id: 6,
+        title: "Longest Substring Without Repeating Characters",
+        description: "Find the length of the longest substring without repeating characters.",
+        difficulty: "Medium",
+    },
+    {
+        id: 7,
+        title: "Median of Two Sorted Arrays",
+        description: "Find the median of two sorted arrays.",
+        difficulty: "Hard",
+    },
+    {
+        id: 8,
+        title: "Regular Expression Matching",
+        description: "Implement regex matching with '.' and '*' for a given pattern and string.",
+        difficulty: "Hard",
+    },
+];
 
 function ProblemLibrary() {
     return (
@@ -38,10 +90,43 @@ function ProblemLibrary() {
             {/* Main Content Section */}
             <Div d="flex" flexDir="column" align="center" justify="center" p="3rem" flexGrow="1">
                 <Text tag="h1" textSize="display2" m={{ b: "1rem" }}>Problem Library</Text>
-                <Text textSize="subheader" textAlign="center" m={{ b: "2rem" }} maxW="30rem">
+                <Text textSize="subheader" textAlign="center" m={{ b: "-1rem" }} maxW="30rem">
                     Browse and solve a wide range of coding problems to sharpen your skills.
                 </Text>
             </Div>
+
+            {/* Problem Cards */}
+            {mockProblems.map((problem) => (
+                <Div
+                    key={problem.id}
+                    p="2rem"
+                    shadow="3"
+                    rounded="lg"
+                    w="100%"
+                    maxW="500px"  // Sets max width for each card
+                    minH="200px"  // Ensures consistent height for each card
+                    m={{ b: "1rem", x: "auto" }}  // Centers each card horizontally
+                    d="flex"
+                    flexDir="column"
+                    align="center"
+                >
+                    <Text tag="h2" textSize="title" m={{ b: "0.5rem" }}>{problem.title}</Text>
+                    <Text textSize="body" textColor="gray700" m={{ b: "0.5rem" }} textAlign="center">
+                        {problem.description}
+                    </Text>
+                    <Text textSize="caption" textColor="gray500" m={{ b: "1rem" }}>Difficulty: {problem.difficulty}</Text>
+
+                    {/* Mode Selection Buttons */}
+                    <Div d="flex" justify="space-between" w="100%">
+                        <Link to={`/practice-mode/${problem.id}`} style={{ textDecoration: 'none' }}>
+                            <Button bg="info700" hoverBg="info800" textColor="white" w="100px">Practice</Button>
+                        </Link>
+                        <Link to={`/duel/${problem.id}`} style={{ textDecoration: 'none' }}>
+                            <Button bg="warning700" hoverBg="warning800" textColor="white" w="100px">Duel</Button>
+                        </Link>
+                    </Div>
+                </Div>
+            ))}
 
             {/* Footer */}
             <Div bg="gray100" p="3rem" d="flex" justify="space-between">
