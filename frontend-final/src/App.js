@@ -1,0 +1,24 @@
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LandingPage from './LandingPage';
+import ProblemLibrary from './ProblemLibrary';
+import PracticeMode from './PracticeMode';
+import Duel from './Duel';
+import LoginSignup from './LoginSignup'
+import './index.css'
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/problem-library" element={<ProblemLibrary />} />
+        <Route path="/practice-mode" element={<PracticeMode />} />
+        <Route path="/duel" element={<Duel />} />
+        <Route path="/login-signup" element={<LoginSignup />} />
+      </Routes>
+    </Router>
+  );
+}
+
+export default App;
