@@ -5,8 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Fixed controller to work with app and added checker class">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.iml" beforeDir="false" afterPath="$PROJECT_DIR$/database/database.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/CustomInMemoryUserDetailsManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/MessageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CodeRush.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodeRush.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/database/sqlconfig.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/src/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/SqlTester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/database/SqlTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/SqlTester.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +31,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -58,6 +73,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.CodeRushApplication.executor": "Run",
+    "Application.SqlTester.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
     "Docker.docker-compose.yml.frontend: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -70,6 +87,13 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources\templates" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend\css" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.CodeRushApplication">
     <configuration name="CodeRushApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.coderush.CodeRushApplication" />
@@ -80,6 +104,13 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SqlTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SqlTester" />
+      <module name="database" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,10 +145,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.CodeRushApplication" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
+        <item itemvalue="Application.SqlTester" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -180,5 +211,8 @@
     <MESSAGE value="Fixed userService to be userServiceImpl in other classes" />
     <MESSAGE value="Fixed controller to work with app and added checker class" />
     <option name="LAST_COMMIT_MESSAGE" value="Fixed controller to work with app and added checker class" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CodeRush$SqlTester.ic" NAME="SqlTester Coverage Results" MODIFIED="1731621214677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
   </component>
 </project>

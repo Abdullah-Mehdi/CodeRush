@@ -1,7 +1,7 @@
 
 
 public class SqlTester {
-    private final static String fileLoc = "C:\\Users\\nickuser\\IdeaProjects\\CodeRush\\backend\\src\\main\\resources\\problems";
+    private final static String fileLoc = "C:\\Users\\asoma\\IdeaProjects\\CodeRush\\backend\\src\\main\\resources\\problems";
 
     public static void  main(String[] args){
         MySqlHandler.addUser("Tommy","zsiurgnglzbrouigybaw4daf","sdjfhfasjkh@askjdha.sad");

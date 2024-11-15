@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table
 public class User {
@@ -33,8 +35,4 @@ public class User {
     private List<Role> roles = new ArrayList<>();
 
 
-    public boolean isLoggedIn() {return isLoggedIn;}
-
-
-    public void setLoggedIn(boolean loggedIn) {isLoggedIn = loggedIn;}
 }

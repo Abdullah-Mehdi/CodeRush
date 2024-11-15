@@ -60,57 +60,57 @@
 </head>
 
 <body>
-    <div id="site-navigation" class="ui small inverted menu">
-        <div id="site-header" class="header item">
-            <a href="/">
-                <img id="site-icon" src="./images/judge0_icon.png">
-                <h2>Judge0 IDE</h2>
-            </a>
+<div id="site-navigation" class="ui small inverted menu">
+    <div id="site-header" class="header item">
+        <a href="/">
+            <img id="site-icon" src="./images/judge0_icon.png">
+            <h2>Judge0 IDE</h2>
+        </a>
+    </div>
+    <div class="left menu">
+        <div class="item borderless">
+            <select id="select-language" class="ui dropdown">
+                <option value="62" mode="java">Java (OpenJDK 13.0.1)</option>
+            </select>
         </div>
-        <div class="left menu">
-            <div class="item borderless">
-                <select id="select-language" class="ui dropdown">
-                    <option value="62" mode="java">Java (OpenJDK 13.0.1)</option>
-                </select>
+        <div class="item fitted borderless wide screen only">
+            <div class="ui input">
+                <input id="compiler-options" type="text" placeholder="Compiler options"></input>
             </div>
-            <div class="item fitted borderless wide screen only">
-                <div class="ui input">
-                    <input id="compiler-options" type="text" placeholder="Compiler options"></input>
-                </div>
+        </div>
+        <div class="item borderless wide screen only">
+            <div class="ui input">
+                <input id="command-line-arguments" type="text" placeholder="Command line arguments"></input>
             </div>
-            <div class="item borderless wide screen only">
-                <div class="ui input">
-                    <input id="command-line-arguments" type="text" placeholder="Command line arguments"></input>
-                </div>
-            </div>
-            <div class="item fitted borderless">
-                <button id="run-btn" class="ui primary button">|> Run (<span id="run-btn-label">⌘</span> + ↵)</button>
-            </div>
+        </div>
+        <div class="item fitted borderless">
+            <button id="run-btn" class="ui primary button">|> Run (<span id="run-btn-label">⌘</span> + ↵)</button>
         </div>
     </div>
+</div>
 
-    <div id="site-content"></div>
+<div id="site-content"></div>
 
-    <div id="site-modal" class="ui modal">
-        <div class="header">
-            <i class="close icon"></i>
-            <span id="title"></span>
-        </div>
-        <div class="scrolling content"></div>
-        <div class="actions">
-            <div class="ui small cancel button">
-                Close (ESC)
-            </div>
+<div id="site-modal" class="ui modal">
+    <div class="header">
+        <i class="close icon"></i>
+        <span id="title"></span>
+    </div>
+    <div class="scrolling content"></div>
+    <div class="actions">
+        <div class="ui small cancel button">
+            Close (ESC)
         </div>
     </div>
+</div>
 
-    <div id="site-footer">
-        <span><a href="PRIVACY.md">Privacy Policy</a></span>
-        <span>•</span>
-        <span><a href="TERMS.md">Terms of Service</a></span>
-        <span>•</span>
-        <span>© 2016-2024 Judge0 – All Rights Reserved.</a>
+<div id="site-footer">
+    <span><a href="PRIVACY.md">Privacy Policy</a></span>
+    <span>•</span>
+    <span><a href="TERMS.md">Terms of Service</a></span>
+    <span>•</span>
+    <span>© 2016-2024 Judge0 – All Rights Reserved.</a>
         <span id="status-line"></span>
-    </div>
+</div>
 </body>
 </html>
