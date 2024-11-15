@@ -1,3 +1,5 @@
+package com.coderush.mysql;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;

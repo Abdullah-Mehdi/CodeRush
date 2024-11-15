@@ -1,3 +1,5 @@
+package com.coderush.mysql;
+
 import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
@@ -18,7 +20,7 @@ public class MySqlHandler {
      * @param email up to 32 characters.
      * @return true if user was added or false if not.
      */
-    protected static boolean addUser(String username, String passwordHash, String email){
+    public static boolean addUser(String username, String passwordHash, String email){
         boolean tf = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -171,7 +173,7 @@ public class MySqlHandler {
      * @param addScore The value to add to the user's score.
      * @return true on successful update.
      */
-    protected static boolean updateScore(String username, int addScore){
+    public static boolean updateScore(String username, int addScore){
         boolean tf = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -417,7 +419,7 @@ public class MySqlHandler {
      * @param newPasswordHash up to 60 characters intended for bcrypt.
      * @return true on success or false for failure.
      */
-    protected static boolean resetPassword(String username, String newPasswordHash){
+    public static boolean resetPassword(String username, String newPasswordHash){
         boolean results = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -497,7 +499,7 @@ public class MySqlHandler {
      * @param username
      * @return true if user is removed.
      */
-    protected static boolean removeUser(String username){
+    public static boolean removeUser(String username){
         boolean results = false;
         PreparedStatement removeUser, setUser1, setUser2;
         if(connection != null || connectToDatabase()){
@@ -530,7 +532,7 @@ public class MySqlHandler {
         FileReader reader;
         Properties p;
         try{
-            reader = new FileReader(".\\database\\sqlconfig.properties");
+            reader = new FileReader(".\\backend\\src\\main\\resources\\sqlconfig.properties");
             p = new Properties();
             p.load(reader);
         }

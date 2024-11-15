@@ -1,5 +1,6 @@
 package com.coderush.user;
 
+import com.coderush.mysql.MySqlHandler;
 import com.coderush.solution.Solution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,12 +24,15 @@ public class UserServiceImpl {
         this.passwordEncoder = passwordEncoder;
     }
 
+
     public void saveUser(UserDTO userDTO) {
+        String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setEmail(userDTO.getEmail());
         //encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setPassword(encodedPassword);
 
         Role role = roleRepository.findByUsername("ROLE_ADMIN");
         if (role == null) {
@@ -36,6 +40,8 @@ public class UserServiceImpl {
         }
         user.setRoles(List.of(role));
         userRepository.save(user);
+
+        MySqlHandler.addUser(user.getUsername(), user.getPassword(), user.getEmail());
     }
 
     private Role checkRoleExist() {
@@ -60,5 +66,28 @@ public class UserServiceImpl {
         userDTO.setEmail(user.getEmail());
         return userDTO;
     }
+    // Update user score (assumes that User has a score attribute or you can get from MySqlHandler)
+    public void updateUserScore(String username, int scoreIncrement) {
+        // Assuming MySqlHandler is the central handler for DB operations related to users
+        boolean success = MySqlHandler.updateScore(username, scoreIncrement);
+
+        if (!success) {
+            // Handle failure (maybe throw exception or return a result indicating failure)
+            throw new RuntimeException("Failed to update score for user: " + username);
+        }
+    }
+
+    // Reset user password (This can be added as a separate service method)
+    public boolean resetPassword(String username, String newPassword) {
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        boolean success = MySqlHandler.resetPassword(username, encodedPassword);
+
+        if (!success) {
+            throw new RuntimeException("Failed to reset password for user: " + username);
+        }
+
+        return true;
+    }
+
 
 }
