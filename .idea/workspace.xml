@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Fixed controller to work with app and added checker class">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/CustomInMemoryUserDetailsManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/websocket/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CodeRush.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CodeRush.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/database/sqlconfig.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/SqlTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/database/SqlTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/SqlTester.class" afterDir="false" />
-    </list>
+    <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Added websocket" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -201,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731539645213</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added websocket">
+      <option name="closed" value="true" />
+      <created>1731636257843</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731636257843</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -210,7 +201,8 @@
     <MESSAGE value="Added lombok, no need for constructors, getters, and setters." />
     <MESSAGE value="Fixed userService to be userServiceImpl in other classes" />
     <MESSAGE value="Fixed controller to work with app and added checker class" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed controller to work with app and added checker class" />
+    <MESSAGE value="Added websocket" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added websocket" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/CodeRush$SqlTester.ic" NAME="SqlTester Coverage Results" MODIFIED="1731621214677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />

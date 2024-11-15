@@ -1,0 +1,48 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"3223ab9e-8702-41e2-8b03-2ac53c56163d\" name=\"Changes\" comment=\"Added database\">\r\n      <change beforePath=\"$PROJECT_DIR$/backend/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/sqlconfig.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/database/sqlconfig.properties\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/database/src/SqlTester.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/database/src/SqlTester.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Application.SqlTester.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"database\"\r\n  }\r\n}]]></component>\r\n  <component name=\"TaskManager\">\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added database\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Added database\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d1ac9a7beeb66eb88b3111acc87b632c65f0cb2a)
++++ b/.idea/workspace.xml	(date 1731621127415)
+@@ -4,10 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="3223ab9e-8702-41e2-8b03-2ac53c56163d" name="Changes" comment="Added database">
++    <list default="true" id="3223ab9e-8702-41e2-8b03-2ac53c56163d" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/database/sqlconfig.properties" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/database/src/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/database/src/SqlTester.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/database/SqlTester.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/database/SqlTester.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -20,17 +21,17 @@
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+     <ConfirmationsSetting value="2" id="Add" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.SqlTester.executor": "Run",
+-    "git-widget-placeholder": "database"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.SqlTester.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;database&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="TaskManager">
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Added database" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Added database" />
++    <option name="LAST_COMMIT_MESSAGE" value="" />
+   </component>
+ </project>
+\ No newline at end of file
