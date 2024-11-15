@@ -1,89 +1,30 @@
-import React from 'react';
-import { Div, Text, Anchor, Button } from 'atomize';
-import { Link } from 'react-router-dom';
+import React from 'react'; // Import React library
+import { Div, Text, Anchor, Button } from 'atomize'; // Import Atomize components
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
-
+// Mock data for problems (to be replaced with API or database fetch)
 const mockProblems = [
-    {
-        id: 1,
-        title: "Two Sum",
-        description: "Return indices of two numbers that add up to a target value in an array.",
-        difficulty: "Easy",
-    },
-    {
-        id: 2,
-        title: "Longest Common Prefix",
-        description: "Find the longest common prefix string in an array of strings.",
-        difficulty: "Easy",
-    },
-    {
-        id: 3,
-        title: "Palindrome Number",
-        description: "Determine if a given integer is a palindrome.",
-        difficulty: "Easy",
-    },
-    {
-        id: 4,
-        title: "Add Two Numbers",
-        description: "Add two linked lists representing numbers and return the sum as a linked list.",
-        difficulty: "Medium",
-    },
-    {
-        id: 5,
-        title: "Longest Palindromic Substring",
-        description: "Return the longest palindromic substring in a given string.",
-        difficulty: "Medium",
-    },
-    {
-        id: 6,
-        title: "Longest Substring Without Repeating Characters",
-        description: "Find the length of the longest substring without repeating characters.",
-        difficulty: "Medium",
-    },
-    {
-        id: 7,
-        title: "Median of Two Sorted Arrays",
-        description: "Find the median of two sorted arrays.",
-        difficulty: "Hard",
-    },
-    {
-        id: 8,
-        title: "Regular Expression Matching",
-        description: "Implement regex matching with '.' and '*' for a given pattern and string.",
-        difficulty: "Hard",
-    },
+    { id: 1, title: "Two Sum", description: "Return indices of two numbers that add up to a target value in an array.", difficulty: "Easy" },
+    { id: 2, title: "Longest Common Prefix", description: "Find the longest common prefix string in an array of strings.", difficulty: "Easy" },
+    { id: 3, title: "Palindrome Number", description: "Determine if a given integer is a palindrome.", difficulty: "Easy" },
+    { id: 4, title: "Add Two Numbers", description: "Add two linked lists representing numbers and return the sum as a linked list.", difficulty: "Medium" },
+    { id: 5, title: "Longest Palindromic Substring", description: "Return the longest palindromic substring in a given string.", difficulty: "Medium" },
+    { id: 6, title: "Longest Substring Without Repeating Characters", description: "Find the length of the longest substring without repeating characters.", difficulty: "Medium" },
+    { id: 7, title: "Median of Two Sorted Arrays", description: "Find the median of two sorted arrays.", difficulty: "Hard" },
+    { id: 8, title: "Regular Expression Matching", description: "Implement regex matching with '.' and '*' for a given pattern and string.", difficulty: "Hard" },
 ];
 
 function ProblemLibrary() {
     return (
         <Div d="flex" flexDir="column" minH="100vh">
+            
             {/* Header and Navigation */}
-            <Div
-                d="flex"
-                justify="space-between"
-                align="center"
-                p="2rem"
-                bg="white"
-            >
+            <Div d="flex" justify="space-between" align="center" p="2rem" bg="white">
                 <Text textSize="title" textColor="black" m={{ l: "1rem" }}>CodeRush</Text>
                 <Div d="flex">
-                    <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-                        Home
-                    </Link>
-                    <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-                        Problem Library
-                    </Link>
-                    {/*
-                    <Link to="/practice-mode" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-                        Practice Mode
-                    </Link>
-                    <Link to="/duel" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-                        Duel
-                    </Link>
-                    */}
-                    <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-                        Login or Signup
-                    </Link>
+                    <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Home</Link>
+                    <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Problem Library</Link>
+                    <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Login or Signup</Link>
                 </Div>
             </Div>
 
@@ -103,9 +44,9 @@ function ProblemLibrary() {
                     shadow="3"
                     rounded="lg"
                     w="100%"
-                    maxW="500px"  // Sets max width for each card
-                    minH="200px"  // Ensures consistent height for each card
-                    m={{ b: "1rem", x: "auto" }}  // Centers each card horizontally
+                    maxW="500px" // Set max width for each card
+                    minH="200px" // Ensure consistent height
+                    m={{ b: "1rem", x: "auto" }} // Center each card horizontally
                     d="flex"
                     flexDir="column"
                     align="center"
@@ -130,39 +71,34 @@ function ProblemLibrary() {
 
             {/* Footer */}
             <Div bg="gray100" p="3rem" d="flex" justify="space-between">
-                <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+                <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
                     <Text textSize="title" m={{ b: "1rem" }}>Coderush</Text>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Features</Anchor>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Setup</Anchor>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Development</Anchor>
                 </Div>
-
-                <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+                <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
                     <Text textSize="title" m={{ b: "1rem" }}>Resources</Text>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Learn Java</Anchor>
                 </Div>
-
-                <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+                <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
                     <Text textSize="title" m={{ b: "1rem" }}>About</Text>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Our Team</Anchor>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Contact</Anchor>
                 </Div>
-
-                <Div d="flex" flexDir="column" align="flex-start" m={{ r: "3rem", b: "2rem" }}>
+                <Div d="flex" flexDir="column" m={{ r: "3rem", b: "2rem" }}>
                     <Text textSize="title" m={{ b: "1rem" }}>Extras</Text>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Help</Anchor>
                     <Anchor href="/" textColor="black" m={{ b: "0.5rem" }}>Feedback</Anchor>
                 </Div>
             </Div>
 
-
+            {/* Footer Bottom */}
             <Div bg="gray100" d="flex" justify="center" p="1rem">
-                <Text textSize="body" textColor="gray800">
-                    Designed & Developed by Team 6
-                </Text>
+                <Text textSize="body" textColor="gray800">Designed & Developed by Team 6</Text>
             </Div>
         </Div>
     );
 }
 
-export default ProblemLibrary;
+export default ProblemLibrary; // Export ProblemLibrary component
