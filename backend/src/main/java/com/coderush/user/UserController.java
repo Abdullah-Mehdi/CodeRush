@@ -1,37 +1,49 @@
 package com.coderush.user;
 
-import com.coderush.solution.Solution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
 @RestController
-@RequestMapping(path = "/users")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserServiceImpl userService;
-
     @Autowired
-    public UserController(UserServiceImpl userService) {
-        this.userService = userService;
+    private UserService userService;
+
+    @PostMapping("/add")
+    public boolean addUser(@RequestParam String username, @RequestParam String passwordHash, @RequestParam String email) {
+        return userService.addUser(username, passwordHash, email);
     }
 
-    // Provides access to the code editor for a logged-in user
-    @GetMapping("/access-editor")
-    public void accessEditor(@RequestParam String username) {
-
+    @PutMapping("/updateScore")
+    public boolean updateScore(@RequestParam String username, @RequestParam int addScore) {
+        return userService.updateScore(username, addScore);
     }
 
-    // Starts a new match for a logged-in user
-    @PostMapping("/start-match")
-    public void startMatch(@RequestParam String username) {
-
+    @GetMapping("/getProblem/{id}")
+    public String[] getProblem(@PathVariable int id) {
+        return userService.getProblem(id);
     }
 
-    // Submits a solution for a logged-in user
-    @PostMapping("/submit-solution")
-    public void submitSolution(@RequestParam String username, @RequestBody Solution solution) {
-
+    @GetMapping("/getUserScore/{username}")
+    public int getUserScore(@PathVariable String username) {
+        return userService.getUserScore(username);
     }
+
+    @GetMapping("/getUserEmail/{username}")
+    public String getUserEmail(@PathVariable String username) {
+        return userService.getUserEmail(username);
+    }
+
+    @PutMapping("/resetPassword")
+    public boolean resetPassword(@RequestParam String username, @RequestParam String newPasswordHash) {
+        return userService.resetPassword(username, newPasswordHash);
+    }
+
+    @PutMapping("/changeEmail")
+    public boolean changeEmail(@RequestParam String username, @RequestParam String newEmail) {
+        return userService.changeEmail(username, newEmail);
+    }
+
+    // Add more endpoints as needed
 }

@@ -4,28 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Front end and backend testing">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/TestApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/TestResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/Practice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/SpringSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/database.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserServiceImpl.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/sqlconfig.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/ProblemReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/ProblemReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/src/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-final/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-final/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-final/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-final/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-final/src/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-final/src/LandingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend-final/src/LoginSignup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend-final/src/LoginSignup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/database/MySqlHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/database/ProblemReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/database/SqlTester.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,23 +79,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CodeRushApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SqlTester.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Docker.docker-compose.yml.frontend: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;backend&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/GitHub/Test_ide/spring-boot-user-registration-and-Login&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CodeRushApplication.executor": "Run",
+    "Application.SqlTester.executor": "Run",
+    "Application.TestApp.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Docker.docker-compose.yml.frontend: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "backend",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/GitHub/Test_ide/spring-boot-user-registration-and-Login",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources" />
@@ -104,7 +109,7 @@
       <recent name="com.coderush" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SqlTester">
+  <component name="RunManager" selected="Application.CodeRushApplication">
     <configuration name="CodeRushApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.coderush.CodeRushApplication" />
       <module name="CodeRush" />
@@ -120,6 +125,13 @@
     </configuration>
     <configuration name="SqlTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.coderush.mysql.SqlTester" />
+      <module name="CodeRush" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestApp" />
       <module name="CodeRush" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -154,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.SqlTester" />
         <item itemvalue="Application.CodeRushApplication" />
+        <item itemvalue="Application.TestApp" />
+        <item itemvalue="Application.SqlTester" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>

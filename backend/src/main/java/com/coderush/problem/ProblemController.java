@@ -1,5 +1,6 @@
 package com.coderush.problem;
 
+import com.coderush.mysql.MySqlHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,24 +19,21 @@ public class ProblemController {
         this.problemService = problemService;
     }
 
-    @GetMapping
-    public List<Problem> getProblems() {
-        return problemService.getProblems();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Problem> getProblemById(@PathVariable("id") Integer id) {
-        Optional<Problem> problem = problemService.getProblemById(id);
-        return problem.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        Optional<Problem> problem = Optional.ofNullable(problemService.getProblemById(id));
+        return problem.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
     @GetMapping("/{id}/template")
-    public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {
+    public ResponseEntity<String> getProblemTemplate(@PathVariable("id") Integer id) {
         String template = problemService.getProblemTemplate(id);
         if (template != null) {
-            return ResponseEntity.ok(template);
+            return ResponseEntity.ok(template);  // Return the starting code template
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();  // Return 404 if template is not found
         }
     }
 }

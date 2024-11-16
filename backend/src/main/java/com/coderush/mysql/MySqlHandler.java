@@ -104,7 +104,7 @@ public class MySqlHandler {
      * @param problemNum the problem number.
      * @return string representation of starting code.
      */
-    protected static String getStartingCode(int problemNum){
+    public static String getStartingCode(int problemNum){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -141,7 +141,7 @@ public class MySqlHandler {
      * @param numRows number of rows to retrieve.
      * @return top 50 rows as an Arraylist of Arraylists of Strings.
      */
-    protected static ArrayList<ArrayList<String>> getLeaderboard(int numRows){
+    public static ArrayList<ArrayList<String>> getLeaderboard(int numRows){
         ResultSet rs;
         ArrayList<ArrayList<String>> results = null;
         if(connection != null || connectToDatabase()){
@@ -230,7 +230,7 @@ public class MySqlHandler {
      * @param score2 the score to add to the player's total score.
      * @return index of versus game or -1 if the addition failed.
      */
-    protected static int addVS(String username1, String username2, int problem, int score1, int score2){
+    public static int addVS(String username1, String username2, int problem, int score1, int score2){
         int index = -1;
         PreparedStatement addVersus, update1, update2, getIndex;
         if(connection != null || connectToDatabase()){
@@ -273,7 +273,7 @@ public class MySqlHandler {
      * @param score the score to add to the player's total score.
      * @return index of versus game or -1 if the addition failed
      */
-    protected static int addSolo(String username, int problem, int score){
+    public static int addSolo(String username, int problem, int score){
         int index = -1;
         PreparedStatement addVersus, update, getIndex;
         if(connection != null || connectToDatabase()){
@@ -308,7 +308,7 @@ public class MySqlHandler {
      * @param id The id of the Problem.
      * @return String[] with {title, description, difficulty}
      */
-    protected static String[] getProblem(int id){
+    public static String[] getProblem(int id){
         ResultSet rs;
         String[] results = {null, null, null};
         if(connection != null || connectToDatabase()){
@@ -337,7 +337,7 @@ public class MySqlHandler {
      * @param username
      * @return The user's score or -1 for an error.
      */
-    protected static int getUserScore(String username){
+    public static int getUserScore(String username){
         ResultSet rs;
         int results = -1;
         if(connection != null || connectToDatabase()){
@@ -364,7 +364,7 @@ public class MySqlHandler {
      * @param username
      * @return String of the user's email or null on a failure.
      */
-    protected static String getUserEmail(String username){
+    public static String getUserEmail(String username){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -391,7 +391,7 @@ public class MySqlHandler {
      * @param email
      * @return String of the username or null on a failure.
      */
-    protected static String getUnameFromEmail(String email){
+    public static String getUsernameFromEmail(String email){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -445,7 +445,7 @@ public class MySqlHandler {
      * @param newEmail new email, limited to 32 characters.
      * @return true on success or false for failure.
      */
-    protected static boolean changeEmail(String username, String newEmail){
+    public static boolean changeEmail(String username, String newEmail){
         boolean results = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -470,7 +470,7 @@ public class MySqlHandler {
      * @param username
      * @return password hash or null on failure.
      */
-    protected static String getPasswordHash(String username){
+    public static String getPasswordHash(String username){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){

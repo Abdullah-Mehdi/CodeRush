@@ -26,6 +26,7 @@ public class User {
     private String password;
     private String email;
     private boolean isLoggedIn;
+    private int score;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
