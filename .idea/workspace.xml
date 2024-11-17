@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Front end and backend testing">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/TestApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/TestResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/Practice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/sqlconfig.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="database" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;denkyirahh&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Abdullah-Mehdi/CodeRush.git&quot;,
+    &quot;accountId&quot;: &quot;9364fe6e-391d-48ba-a577-69dff1dbb8d8&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2ons3tiA1fla4dVJLKuMEnwCKmt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CodeRushApplication.executor": "Run",
+    "Application.SqlTester.executor": "Run",
+    "Application.TestApp.executor": "Run",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Docker.docker-compose.yml.frontend: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "backend",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/GitHub/Test_ide/spring-boot-user-registration-and-Login",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\database" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources\templates" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend" />
+      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend\css" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.coderush" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.CodeRushApplication">
+    <configuration name="CodeRushApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.coderush.CodeRushApplication" />
+      <module name="CodeRush" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.coderush.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SqlTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.coderush.mysql.SqlTester" />
+      <module name="CodeRush" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestApp" />
+      <module name="CodeRush" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.frontend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="frontend" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CodeRushApplication" />
+        <item itemvalue="Application.TestApp" />
+        <item itemvalue="Application.SqlTester" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.frontend: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="" />
+      <created>1731516477156</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731516477156</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Fixed problem to be able to run app">
+      <option name="closed" value="true" />
+      <created>1731522118638</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731522118638</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added user registration and login">
+      <option name="closed" value="true" />
+      <created>1731537590292</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731537590292</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added lombok, no need for constructors, getters, and setters.">
+      <option name="closed" value="true" />
+      <created>1731537913057</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731537913057</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fixed userService to be userServiceImpl in other classes">
+      <option name="closed" value="true" />
+      <created>1731538539970</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731538539970</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed controller to work with app and added checker class">
+      <option name="closed" value="true" />
+      <created>1731539645213</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731539645213</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added websocket">
+      <option name="closed" value="true" />
+      <created>1731636257843</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731636257843</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added frontend-final">
+      <option name="closed" value="true" />
+      <created>1731636875247</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731636875247</updated>
+    </task>
+    <task id="LOCAL-00008" summary="test">
+      <option name="closed" value="true" />
+      <created>1731637233758</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731637233758</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed problem to be able to run app" />
+    <MESSAGE value="Added user registration and login" />
+    <MESSAGE value="Added lombok, no need for constructors, getters, and setters." />
+    <MESSAGE value="Fixed userService to be userServiceImpl in other classes" />
+    <MESSAGE value="Fixed controller to work with app and added checker class" />
+    <MESSAGE value="Added websocket" />
+    <MESSAGE value="Added frontend-final" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CodeRush$SqlTester.ic" NAME="SqlTester Coverage Results" MODIFIED="1731621214677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>
