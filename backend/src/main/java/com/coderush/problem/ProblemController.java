@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 public class ProblemController {
 
     private static final String JUDGE0_API_URL = "https://judge0-ce.p.rapidapi.com/submissions?base64_encoded=false&wait=true";
-    private static final String RAPIDAPI_KEY = "your-rapidapi-key"; // Replace with your RapidAPI key
+    private static final String RAPIDAPI_KEY = "904b660389msh6a9285a005ef768p175becjsn4656b014a0a5"; // Replace with your RapidAPI key
     private static final String RAPIDAPI_HOST = "judge0-ce.p.rapidapi.com";
 
     @PostMapping("/run")
