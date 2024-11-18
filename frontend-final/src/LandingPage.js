@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'; // Importing Link for navigation
 function LandingPage() {
   return (
     <Div d="flex" flexDir="column" minH="100vh">
-      
+
       {/* Header and Navigation Section */}
       <Div
         d="flex"
@@ -26,6 +26,9 @@ function LandingPage() {
           </Link>
           <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Problem Library
+          </Link>
+          <Link to="/leaderboard" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
+            Leaderboard
           </Link>
           <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Login or Signup
