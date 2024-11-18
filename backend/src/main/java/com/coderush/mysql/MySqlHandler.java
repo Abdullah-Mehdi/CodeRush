@@ -527,6 +527,32 @@ public class MySqlHandler {
         return results;
     }
 
+    public static ArrayList<ArrayList<String>> getTestCases(int problemid){
+        ResultSet rs;
+        ArrayList<ArrayList<String>> results = null;
+        if(connection != null || connectToDatabase()){
+            try {
+                preparedStatement = connection.prepareStatement("SELECT input, output FROM testcases WHERE problemid = ?");
+                preparedStatement.setInt(1, problemid);
+                rs = preparedStatement.executeQuery();
+                results = new ArrayList<>();
+                while(rs.next()){
+                    ArrayList<String> row = new ArrayList<>();
+                    row.add(rs.getString("input"));
+                    row.add(rs.getString("output"));
+                    results.add(row);
+                }
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+            finally {
+                closeConnection();
+            }
+        }
+        return results;
+    }
+
 
     private static boolean connectToDatabase(){
         FileReader reader;

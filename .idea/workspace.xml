@@ -5,31 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6846f8a-49f1-4e2e-813a-87ee7acf13b6" name="Changes" comment="Front end and backend testing">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/TestApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/TestResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/Practice.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/practice/PracticeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_8_2024_8_24_PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_8_2024_8_24_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/CodeRushApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/checker/Checker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/codeeditor/CodeEditorService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/match/MatchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/MySqlHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/mysql/SqlTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/ProblemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/problem/TestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/user/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/sqlconfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/sqlconfig.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/coderush/tables.sql" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +41,12 @@
     &quot;assignee&quot;: &quot;denkyirahh&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Abdullah-Mehdi/CodeRush.git&quot;,
-    &quot;accountId&quot;: &quot;9364fe6e-391d-48ba-a577-69dff1dbb8d8&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Abdullah-Mehdi/CodeRush.git",
+    "accountId": "0ff1ec71-2c2c-43aa-8fd0-59cc79f1dc87"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -89,27 +71,28 @@
     "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "backend",
+    "git-widget-placeholder": "final-testing-nicholas",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/GitHub/Test_ide/spring-boot-user-registration-and-Login",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\nickuser\IdeaProjects\CodeRush\backend\src\main\java\com\coderush\mysql" />
       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources" />
       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\database" />
       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\backend\src\main\resources\templates" />
       <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend" />
-      <recent name="C:\Users\asoma\IdeaProjects\CodeRush\frontend\css" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.coderush" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CodeRushApplication">
+  <component name="RunManager">
     <configuration name="CodeRushApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.coderush.CodeRushApplication" />
       <module name="CodeRush" />
@@ -249,6 +232,17 @@
     </task>
     <option name="localTasksCounter" value="9" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed problem to be able to run app" />
