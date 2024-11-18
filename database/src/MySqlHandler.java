@@ -1,5 +1,3 @@
-package com.coderush.mysql;
-
 import java.io.FileReader;
 import java.sql.*;
 import java.util.*;
@@ -20,7 +18,7 @@ public class MySqlHandler {
      * @param email up to 32 characters.
      * @return true if user was added or false if not.
      */
-    public static boolean addUser(String username, String passwordHash, String email){
+    protected static boolean addUser(String username, String passwordHash, String email){
         boolean tf = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -104,7 +102,7 @@ public class MySqlHandler {
      * @param problemNum the problem number.
      * @return string representation of starting code.
      */
-    public static String getStartingCode(int problemNum){
+    protected static String getStartingCode(int problemNum){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -141,7 +139,7 @@ public class MySqlHandler {
      * @param numRows number of rows to retrieve.
      * @return top 50 rows as an Arraylist of Arraylists of Strings.
      */
-    public static ArrayList<ArrayList<String>> getLeaderboard(int numRows){
+    protected static ArrayList<ArrayList<String>> getLeaderboard(int numRows){
         ResultSet rs;
         ArrayList<ArrayList<String>> results = null;
         if(connection != null || connectToDatabase()){
@@ -173,7 +171,7 @@ public class MySqlHandler {
      * @param addScore The value to add to the user's score.
      * @return true on successful update.
      */
-    public static boolean updateScore(String username, int addScore){
+    protected static boolean updateScore(String username, int addScore){
         boolean tf = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -230,7 +228,7 @@ public class MySqlHandler {
      * @param score2 the score to add to the player's total score.
      * @return index of versus game or -1 if the addition failed.
      */
-    public static int addVS(String username1, String username2, int problem, int score1, int score2){
+    protected static int addVS(String username1, String username2, int problem, int score1, int score2){
         int index = -1;
         PreparedStatement addVersus, update1, update2, getIndex;
         if(connection != null || connectToDatabase()){
@@ -273,7 +271,7 @@ public class MySqlHandler {
      * @param score the score to add to the player's total score.
      * @return index of versus game or -1 if the addition failed
      */
-    public static int addSolo(String username, int problem, int score){
+    protected static int addSolo(String username, int problem, int score){
         int index = -1;
         PreparedStatement addVersus, update, getIndex;
         if(connection != null || connectToDatabase()){
@@ -308,7 +306,7 @@ public class MySqlHandler {
      * @param id The id of the Problem.
      * @return String[] with {title, description, difficulty}
      */
-    public static String[] getProblem(int id){
+    protected static String[] getProblem(int id){
         ResultSet rs;
         String[] results = {null, null, null};
         if(connection != null || connectToDatabase()){
@@ -337,7 +335,7 @@ public class MySqlHandler {
      * @param username
      * @return The user's score or -1 for an error.
      */
-    public static int getUserScore(String username){
+    protected static int getUserScore(String username){
         ResultSet rs;
         int results = -1;
         if(connection != null || connectToDatabase()){
@@ -364,7 +362,7 @@ public class MySqlHandler {
      * @param username
      * @return String of the user's email or null on a failure.
      */
-    public static String getUserEmail(String username){
+    protected static String getUserEmail(String username){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -391,7 +389,7 @@ public class MySqlHandler {
      * @param email
      * @return String of the username or null on a failure.
      */
-    public static String getUsernameFromEmail(String email){
+    protected static String getUnameFromEmail(String email){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -419,7 +417,7 @@ public class MySqlHandler {
      * @param newPasswordHash up to 60 characters intended for bcrypt.
      * @return true on success or false for failure.
      */
-    public static boolean resetPassword(String username, String newPasswordHash){
+    protected static boolean resetPassword(String username, String newPasswordHash){
         boolean results = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -445,7 +443,7 @@ public class MySqlHandler {
      * @param newEmail new email, limited to 32 characters.
      * @return true on success or false for failure.
      */
-    public static boolean changeEmail(String username, String newEmail){
+    protected static boolean changeEmail(String username, String newEmail){
         boolean results = false;
         if(connection != null || connectToDatabase()){
             try {
@@ -470,7 +468,7 @@ public class MySqlHandler {
      * @param username
      * @return password hash or null on failure.
      */
-    public static String getPasswordHash(String username){
+    protected static String getPasswordHash(String username){
         ResultSet rs;
         String results = null;
         if(connection != null || connectToDatabase()){
@@ -499,7 +497,7 @@ public class MySqlHandler {
      * @param username
      * @return true if user is removed.
      */
-    public static boolean removeUser(String username){
+    protected static boolean removeUser(String username){
         boolean results = false;
         PreparedStatement removeUser, setUser1, setUser2;
         if(connection != null || connectToDatabase()){
@@ -527,38 +525,12 @@ public class MySqlHandler {
         return results;
     }
 
-    public static ArrayList<ArrayList<String>> getTestCases(int problemid){
-        ResultSet rs;
-        ArrayList<ArrayList<String>> results = null;
-        if(connection != null || connectToDatabase()){
-            try {
-                preparedStatement = connection.prepareStatement("SELECT input, output FROM testcases WHERE problemid = ?");
-                preparedStatement.setInt(1, problemid);
-                rs = preparedStatement.executeQuery();
-                results = new ArrayList<>();
-                while(rs.next()){
-                    ArrayList<String> row = new ArrayList<>();
-                    row.add(rs.getString("input"));
-                    row.add(rs.getString("output"));
-                    results.add(row);
-                }
-            }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-            finally {
-                closeConnection();
-            }
-        }
-        return results;
-    }
-
 
     private static boolean connectToDatabase(){
         FileReader reader;
         Properties p;
         try{
-            reader = new FileReader(".\\backend\\src\\main\\resources\\sqlconfig.properties");
+            reader = new FileReader(".\\database\\sqlconfig.properties");
             p = new Properties();
             p.load(reader);
         }
