@@ -3,6 +3,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")  // Allow requests from the React frontend
 public class LeaderboardController {
 
     @GetMapping("/leaderboard")
