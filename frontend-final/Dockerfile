@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies including @monaco-editor/react, axios, and react-router-dom
 COPY package*.json ./
-RUN npm install @monaco-editor/react axios react-router-dom && npm install
+RUN npm install @monaco-editor/react axios react-router-dom react-helmet && npm install
 
 COPY . .
 
