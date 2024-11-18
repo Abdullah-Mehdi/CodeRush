@@ -1,6 +1,7 @@
 import React from 'react'; // Import React library
 import { Div, Text, Anchor, Button } from 'atomize'; // Import Atomize components
 import { Link } from 'react-router-dom'; // Import Link for navigation
+import UserProfileIcon from './components/UserProfileIcon'; // Import UserProfileIcon component
 
 // Mock data for problems (to be replaced with API or database fetch)
 const mockProblems = [
@@ -15,16 +16,24 @@ const mockProblems = [
 ];
 
 function ProblemLibrary() {
+    const user = JSON.parse(localStorage.getItem('user')); // Add this line to get user data
+
     return (
         <Div d="flex" flexDir="column" minH="100vh">
             
             {/* Header and Navigation */}
             <Div d="flex" justify="space-between" align="center" p="2rem" bg="white">
                 <Text textSize="title" textColor="black" m={{ l: "1rem" }}>CodeRush</Text>
-                <Div d="flex">
+                <Div d="flex" align="center">
                     <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Home</Link>
                     <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Problem Library</Link>
-                    <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Login or Signup</Link>
+                    {user ? (
+                        <UserProfileIcon />
+                    ) : (
+                        <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
+                            Login or Signup
+                        </Link>
+                    )}
                 </Div>
             </Div>
 

@@ -6,6 +6,7 @@ import PracticeMode from './PracticeMode';
 import Duel from './Duel';
 import LoginSignup from './LoginSignup';
 import './index.css';
+import Profile from './Profile';
 
 function App() {
   // Add this useEffect hook to set the document title
@@ -21,6 +22,7 @@ function App() {
         <Route path="/practice-mode/:id" element={<PracticeMode />} />
         <Route path="/duel/:id" element={<Duel />} />
         <Route path="/login-signup" element={<LoginSignup />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

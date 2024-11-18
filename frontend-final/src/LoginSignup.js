@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Div, Text, Button, Input } from 'atomize';
 import axiosInstance from './axiosConfig';
 import SuccessModal from './components/SuccessModal';
+import UserProfileIcon from './components/UserProfileIcon'; // Importing UserProfileIcon component
 
 function LoginSignup() {
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -16,6 +17,10 @@ function LoginSignup() {
     const handleSubmit = async () => {
         try {
             setErrorMessage('');
+
+        if (!validateForm()) {
+            return; // Stop execution if validation fails
+        }
             
             if (isLoginMode) {
                 // Login
