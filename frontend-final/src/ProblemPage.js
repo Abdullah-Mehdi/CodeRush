@@ -31,7 +31,55 @@ const testCases = {
             },
             expected: [1, 2]
         }
-    ]
+    ],
+
+    2: [ // Longest Common Prefix
+      {
+          input: {
+              strs: ["flower", "flow", "flight"]
+          },
+          expected: "fl"
+      },
+      {
+          input: {
+              strs: ["dog", "racecar", "car"]
+          },
+          expected: ""
+      },
+      {
+          input: {
+              strs: ["interspecies", "interstellar", "interstate"]
+          },
+          expected: "inters"
+      }
+  ],
+
+  3: [ // Palindrome Number test cases
+    {
+        input: {
+            num: 121
+        },
+        expected: true
+    },
+    {
+        input: {
+            num: -121
+        },
+        expected: false
+    },
+    {
+        input: {
+            num: 10
+        },
+        expected: false
+    },
+    {
+        input: {
+            num: 12321
+        },
+        expected: true
+    }
+  ]
     // Add test cases for other problems as needed
 };
 
@@ -46,6 +94,14 @@ const ProblemPage = ({ isDuelMode }) => {
     const [pyodide, setPyodide] = useState(null);
     const [currentProblem, setCurrentProblem] = useState(null);
 
+      // Helper function to compare arrays - definining it before use
+      const arraysEqual = (arr1, arr2) => {
+        if (arr1.length !== arr2.length) return false;
+        const sorted1 = [...arr1].sort();
+        const sorted2 = [...arr2].sort();
+        return sorted1.every((value, index) => value === sorted2[index]);
+    };
+    
     // Initialize Pyodide
     useEffect(() => {
         const loadPyodide = async () => {
@@ -107,93 +163,170 @@ const ProblemPage = ({ isDuelMode }) => {
     };
 
     const handleSubmitSolution = async () => {
-        if (!pyodide || !currentProblem) return;
+      if (!pyodide) {
+        setOutput('Python environment is not ready yet. Please wait...');
+        return;
+    }
 
-        setProcessing(true);
-        try {
-            const currentTestCases = testCases[parseInt(id)];
-            if (!currentTestCases) {
-                setOutput('No test cases available for this problem.');
-                return;
-            }
+    setProcessing(true);
+    try {
+        const currentTestCases = testCases[parseInt(id)];
+        if (!currentTestCases) {
+            setOutput('No test cases found for this problem.');
+            setIsCorrect(false);
+            return;
+        }
 
-            let allTestsPassed = true;
-            let testResults = [];
+        let allTestsPassed = true;
+        let testResults = [];
 
-            for (const testCase of currentTestCases) {
-                try {
-                    // Reset stdout for each test case
-                    pyodide.runPython(`
-                        import sys
-                        import io
-                        sys.stdout = io.StringIO()
-                    `);
+        for (const testCase of currentTestCases) {
+            try {
+                // Reset stdout for each test case
+                pyodide.runPython(`
+                    import sys
+                    import io
+                    sys.stdout = io.StringIO()
+                `);
 
-                    // Run the user's code with test case
-                    const wrappedCode = `
+                // Different wrapper based on problem ID
+                let wrapper;
+                const problemId = parseInt(id);
+                
+                if (problemId === 1) {
+                    wrapper = `
 ${code}
 
-# Test input
+# Test case input
 nums = ${JSON.stringify(testCase.input.nums)}
 target = ${testCase.input.target}
 
-# Run solution
+# Run the solution
 result = two_sum(nums, target)
 print(result)
                     `;
+                } else if (problemId === 2) {
+                    wrapper = `
+${code}
 
-                    await pyodide.runPythonAsync(wrappedCode);
-                    const output = pyodide.runPython("sys.stdout.getvalue()").trim();
-                    
-                    // Parse output and compare with expected result
-                    const result = JSON.parse(output.replace(/[\(\)]/g, m => m === '(' ? '[' : ']'));
-                    const passed = arraysEqual(result, testCase.expected);
-                    
-                    testResults.push({
-                        input: testCase.input,
-                        expected: testCase.expected,
-                        output: result,
-                        passed
-                    });
+# Test case input
+strs = ${JSON.stringify(testCase.input.strs)}
 
-                    if (!passed) allTestsPassed = false;
+# Run the solution
+result = longest_common_prefix(strs)
+print(result)
+                    `;
+                } else if (problemId === 3) {
+                    wrapper = `
+${code}
 
-                } catch (error) {
-                    testResults.push({
-                        input: testCase.input,
-                        error: error.message,
-                        passed: false
-                    });
+# Test case input
+num = ${testCase.input.num}
+
+# Run the solution
+result = is_palindrome(num)
+print(str(result).lower())
+                    `;
+                }
+
+                await pyodide.runPythonAsync(wrapper);
+                const output = pyodide.runPython("sys.stdout.getvalue()").trim();
+                
+                // Different comparison logic based on problem ID
+                let isTestPassed;
+                if (problemId === 1) {
+                    const result = JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']'));
+                    isTestPassed = arraysEqual(result, testCase.expected);
+                } else if (problemId === 2) {
+                    isTestPassed = output === `"${testCase.expected}"` || 
+                                 output === `'${testCase.expected}'` || 
+                                 output === testCase.expected;
+                } else if (problemId === 3) {
+                    const resultBool = output.trim() === 'true';
+                    isTestPassed = resultBool === testCase.expected;
+                }
+
+                testResults.push({
+                    input: testCase.input,
+                    expected: testCase.expected,
+                    output: problemId === 3 ? output.trim() === 'true' :
+                           problemId === 1 ? JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']')) :
+                           output.replace(/['"]/g, ''),
+                    passed: isTestPassed
+                });
+
+                if (!isTestPassed) {
                     allTestsPassed = false;
                 }
+
+            } catch (error) {
+                testResults.push({
+                    input: testCase.input,
+                    error: error.message,
+                    passed: false
+                });
+                allTestsPassed = false;
             }
-
-            setOutput(formatTestResults(testResults));
-            setIsCorrect(allTestsPassed);
-
-        } catch (error) {
-            setOutput(`Error: ${error.message}`);
-            setIsCorrect(false);
-        } finally {
-            setProcessing(false);
         }
-    };
 
-    const arraysEqual = (arr1, arr2) => {
-        if (arr1.length !== arr2.length) return false;
-        const sorted1 = [...arr1].sort();
-        const sorted2 = [...arr2].sort();
-        return sorted1.every((value, index) => value === sorted2[index]);
-    };
+        const resultOutput = formatTestResults(testResults);
+        setOutput(resultOutput);
+        setIsCorrect(allTestsPassed);
 
-    const formatTestResults = (results) => {
-        return results.map((result, index) => {
-            if (result.error) {
+    } catch (error) {
+        setOutput(`Error: ${error.message}`);
+        setIsCorrect(false);
+    } finally {
+        setProcessing(false);
+    }
+};
+
+const formatTestResults = (results) => {
+    const problemId = parseInt(id);
+    return results.map((result, index) => {
+        if (result.error) {
+            if (problemId === 1) {
                 return `Test Case ${index + 1}: Failed\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nError: ${result.error}\n`;
+            } else if (problemId === 2) {
+                return `Test Case ${index + 1}: Failed\nInput: strs=${JSON.stringify(result.input.strs)}\nError: ${result.error}\n`;
+            } else if (problemId === 3) {
+                return `Test Case ${index + 1}: Failed\nInput: num=${result.input.num}\nError: ${result.error}\n`;
             }
+        }
+        
+        if (problemId === 1) {
             return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nExpected: ${JSON.stringify(result.expected)}\nGot: ${JSON.stringify(result.output)}\n`;
-        }).join('\n');
-    };
+        } else if (problemId === 2) {
+            return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: strs=${JSON.stringify(result.input.strs)}\nExpected: "${result.expected}"\nGot: "${result.output}"\n`;
+        } else if (problemId === 3) {
+            return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: num=${result.input.num}\nExpected: ${result.expected}\nGot: ${result.output}\n`;
+        }
+    }).join('\n');
+};
+
+// Add initial code template based on problem ID
+useEffect(() => {
+    const problemId = parseInt(id);
+    if (problemId === 1) {
+        setCode(`def two_sum(nums, target):
+    # Write your solution here
+    # Return indices of two numbers that add up to target
+    # Example: nums = [2,7,11,15], target = 9 should return [0,1]
+    pass`);
+    } else if (problemId === 2) {
+        setCode(`def longest_common_prefix(strs):
+    # Write your solution here
+    # Return the longest common prefix string
+    # Example: ["flower", "flow", "flight"] should return "fl"
+    pass`);
+    } else if (problemId === 3) {
+      setCode(`def is_palindrome(num):
+    # Write your solution here
+    # Return True if the number is a palindrome, False otherwise
+    # Example: 121 should return True because it reads the same forward and backward
+    pass`);
+    }
+}, [id]);
 
     if (!currentProblem) {
         return <Div>Loading problem...</Div>;
