@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CodeRushApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(CodeRushApplication.class, args);
 	}
 }

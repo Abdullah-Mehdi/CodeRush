@@ -1,0 +1,59 @@
+Index: database/sqlconfig.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>host = mysql-gmu-321-gmu-04bc.l.aivencloud.com\r\nport = 24991\r\ndatabaseName = justwork\r\nuserName = autosystemuser1\r\npassword = AVNS_CCWHBKO2wym_z2vDVpG
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/database/sqlconfig.properties b/database/sqlconfig.properties
+--- a/database/sqlconfig.properties	(revision 76eb727aee51e4043cd7c87c48a9fc5d8ca22a68)
++++ b/database/sqlconfig.properties	(date 1731619192360)
+@@ -2,4 +2,5 @@
+ port = 24991
+ databaseName = justwork
+ userName = autosystemuser1
+-password = AVNS_CCWHBKO2wym_z2vDVpG
+\ No newline at end of file
++#password = AVNS_CCWHBKO2wym_z2vDVpG
++password = AVNS_7RI9laNtzcJYcfS2Uof
+\ No newline at end of file
+Index: database/src/SqlTester.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\n\r\npublic class SqlTester {\r\n    private final static String fileLoc = \"C:\\\\Users\\\\nickuser\\\\IdeaProjects\\\\CodeRush\\\\backend\\\\src\\\\main\\\\resources\\\\problems\";\r\n\r\n    public static void  main(String[] args){\r\n        MySqlHandler.addUser(\"Tommy\",\"zsiurgnglzbrouigybaw4daf\",\"sdjfhfasjkh@askjdha.sad\");\r\n        MySqlHandler.addUser(\"Wellington\",\"sdgawetwa4r3edsfweaf\",\"awefasd@askaweajdha.sad\");\r\n        MySqlHandler.addUser(\"NICK\",\"shefrhsdryergrsdrgter\",\"asassdaw@askaweajdha.sad\");\r\n        MySqlHandler.addUser(\"Reaact\",\"yhwraryhaweryh\",\"awefasd@askaweajdha.sad\");\r\n\r\n        ProblemReader.reader(fileLoc);\r\n\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/database/src/SqlTester.java b/database/src/SqlTester.java
+--- a/database/src/SqlTester.java	(revision 76eb727aee51e4043cd7c87c48a9fc5d8ca22a68)
++++ b/database/src/SqlTester.java	(date 1731619301391)
+@@ -1,7 +1,7 @@
+ 
+ 
+ public class SqlTester {
+-    private final static String fileLoc = "C:\\Users\\nickuser\\IdeaProjects\\CodeRush\\backend\\src\\main\\resources\\problems";
++    private final static String fileLoc = "C:\\Users\\asoma\\IdeaProjects\\CodeRush\\backend\\src\\main\\resources\\problems";
+ 
+     public static void  main(String[] args){
+         MySqlHandler.addUser("Tommy","zsiurgnglzbrouigybaw4daf","sdjfhfasjkh@askjdha.sad");
+Index: backend/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n\t<modelVersion>4.0.0</modelVersion>\r\n\t<parent>\r\n\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t<artifactId>spring-boot-starter-parent</artifactId>\r\n\t\t<version>3.3.5</version>\r\n\t\t<relativePath/> <!-- lookup parent from repository -->\r\n\t</parent>\r\n\t<groupId>com.coderush</groupId>\r\n\t<artifactId>CodeRush</artifactId>\r\n\t<version>0.0.1-SNAPSHOT</version>\r\n\t<name>CodeRush</name>\r\n\t<description>Demo project for Spring Boot</description>\r\n\t<url/>\r\n\t<licenses>\r\n\t\t<license/>\r\n\t</licenses>\r\n\t<developers>\r\n\t\t<developer/>\r\n\t</developers>\r\n\t<scm>\r\n\t\t<connection/>\r\n\t\t<developerConnection/>\r\n\t\t<tag/>\r\n\t\t<url/>\r\n\t</scm>\r\n\t<properties>\r\n\t\t<java.version>23</java.version>\r\n\t</properties>\r\n\t<dependencies>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-data-jpa</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-web</artifactId>\r\n\t\t</dependency>\r\n\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-docker-compose</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t\t<optional>true</optional>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-validation</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>com.mysql</groupId>\r\n\t\t\t<artifactId>mysql-connector-j</artifactId>\r\n\t\t\t<scope>runtime</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-starter-security</artifactId>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t<artifactId>spring-boot-testcontainers</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.testcontainers</groupId>\r\n\t\t\t<artifactId>junit-jupiter</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.testcontainers</groupId>\r\n\t\t\t<artifactId>mysql</artifactId>\r\n\t\t\t<scope>test</scope>\r\n\t\t</dependency>\r\n\t\t<dependency>\r\n\t\t\t<groupId>org.projectlombok</groupId>\r\n\t\t\t<artifactId>lombok</artifactId>\r\n\t\t\t<version>1.18.34</version>\r\n\t\t</dependency>\r\n\t</dependencies>\r\n\r\n\t<build>\r\n\t\t<plugins>\r\n\t\t\t<plugin>\r\n\t\t\t\t<groupId>org.springframework.boot</groupId>\r\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\r\n\r\n\t\t\t</plugin>\r\n\t\t</plugins>\r\n\t</build>\r\n\r\n</project>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/pom.xml b/backend/pom.xml
+--- a/backend/pom.xml	(revision 76eb727aee51e4043cd7c87c48a9fc5d8ca22a68)
++++ b/backend/pom.xml	(date 1731619192368)
+@@ -83,6 +83,10 @@
+ 			<artifactId>lombok</artifactId>
+ 			<version>1.18.34</version>
+ 		</dependency>
++		<dependency>
++			<groupId>org.springframework.boot</groupId>
++			<artifactId>spring-boot-starter-websocket</artifactId>
++		</dependency>
+ 	</dependencies>
+ 
+ 	<build>

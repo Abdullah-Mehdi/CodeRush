@@ -1,13 +1,26 @@
 version: '3'
 services:
-  frontend:
-    build: 
-      context: ./frontend
+  backend:
+    build:
+      context: ./backend  # Path to Spring Boot backend directory
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/coderush
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: rootpassword
     depends_on:
       - db
+
+  frontend:
+    build:
+      context: ./frontend-final  # Path to React frontend directory
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"  # Maps port 80 inside container to port 3000 on localhost (for Nginx)
+    depends_on:
+      - backend
 
   db:
     image: mysql:8
@@ -18,3 +31,4 @@ services:
       - ./mysql-data:/var/lib/mysql
     ports:
       - "3306:3306"
+

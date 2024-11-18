@@ -1,0 +1,36 @@
+Index: docker-compose.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>version: '3'\r\nservices:\r\n  frontend:\r\n    build: \r\n      context: ./frontend\r\n      dockerfile: Dockerfile\r\n    ports:\r\n      - \"3000:3000\"\r\n    depends_on:\r\n      - db\r\n\r\n  db:\r\n    image: mysql:8\r\n    environment:\r\n      MYSQL_ROOT_PASSWORD: rootpassword\r\n      MYSQL_DATABASE: coderush\r\n    volumes:\r\n      - ./mysql-data:/var/lib/mysql\r\n    ports:\r\n      - \"3306:3306\"\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/docker-compose.yml b/docker-compose.yml
+--- a/docker-compose.yml	(revision 623798a9c2222ae357974f84a5fe0b001c6cad80)
++++ b/docker-compose.yml	(date 1731621552417)
+@@ -2,7 +2,7 @@
+ services:
+   frontend:
+     build: 
+-      context: ./frontend
++      context: ./frontend-final
+       dockerfile: Dockerfile
+     ports:
+       - "3000:3000"
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_23\" default=\"true\" project-jdk-name=\"openjdk-23\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 623798a9c2222ae357974f84a5fe0b001c6cad80)
++++ b/.idea/misc.xml	(date 1731621311793)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_23" default="true" project-jdk-name="openjdk-23" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>

@@ -1,0 +1,83 @@
+Index: backend/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=CodeRush\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/backend/src/main/resources/application.properties b/backend/src/main/resources/application.properties
+--- a/backend/src/main/resources/application.properties	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/resources/application.properties	(date 1731380092425)
+@@ -1,1 +1,8 @@
+ spring.application.name=CodeRush
++
++spring.datasource.url=jdbc:mysql://localhost:3306/coderush
++spring.datasource.username=
++spring.datasource.password=rootpassword
++spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
++spring.jpa.hibernate.ddl-auto=update
++spring.jpa.show-sql=true
+\ No newline at end of file
+Index: backend/src/main/java/com/coderush/problem/Problem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coderush.problem;\r\n\r\nimport java.util.*;\r\n\r\npublic class Problem {\r\n    // Attributes\r\n    private Integer id;\r\n    private String title;\r\n    private String description;\r\n    private String difficulty;\r\n    private String template;\r\n    private List<Object[]> testCases;\r\n    // Constructor\r\n    public Problem() {}\r\n    public Problem(Integer id, String title, String description, String difficulty, String template) {\r\n        this.id = id;\r\n        this.title = title;\r\n        this.description = description;\r\n        this.difficulty = difficulty;\r\n        this.template = template;\r\n    }\r\n\r\n    // Setters\r\n    public void setId(Integer id) {this.id = id;}\r\n\r\n    public void setTitle(String title) {this.title = title;}\r\n\r\n    public void setDescription(String description) {this.description = description;}\r\n\r\n    public void setDifficulty(String difficulty) {this.difficulty = difficulty;}\r\n\r\n    public void setTemplate(String template) {this.template = template;}\r\n\r\n    public void setTestCases(List<Object[]> testCases) {this.testCases = testCases;}\r\n\r\n    // Getters\r\n    public Integer getId() {return id;}\r\n\r\n    public String getTitle() {return title;}\r\n\r\n    public String getDescription() {return description;}\r\n\r\n    public String getDifficulty() {return difficulty;}\r\n\r\n    public String getTemplate() {return template;}\r\n\r\n    public List<Object[]> getTestCases() {return testCases;}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/coderush/problem/Problem.java b/backend/src/main/java/com/coderush/problem/Problem.java
+--- a/backend/src/main/java/com/coderush/problem/Problem.java	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/java/com/coderush/problem/Problem.java	(date 1731380092430)
+@@ -1,8 +1,13 @@
+ package com.coderush.problem;
+ 
++import jakarta.persistence.*;
++
+ import java.util.*;
+ 
++@Entity
+ public class Problem {
++    @Id
++    @GeneratedValue(strategy = GenerationType.AUTO)
+     // Attributes
+     private Integer id;
+     private String title;
+Index: backend/src/main/java/com/coderush/problem/ProblemController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.coderush.problem;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@RestController\r\n@RequestMapping(path = \"api/v1/problem\")\r\npublic class ProblemController {\r\n\r\n    private final ProblemService problemService;\r\n\r\n    @Autowired\r\n    public ProblemController(ProblemService problemService) {\r\n        this.problemService = problemService;\r\n    }\r\n\r\n    @GetMapping\r\n    public List<Problem> getProblems() {\r\n        return problemService.getProblems();\r\n    }\r\n\r\n    @GetMapping(\"/{id}\")\r\n    public Optional<Problem> getProblemById(@PathVariable(\"id\") Integer id) {\r\n        return problemService.getProblemById(id);\r\n    }\r\n\r\n    @GetMapping(\"/{id}/template\")\r\n    public ResponseEntity<String> getProblemTemplate(@PathVariable Integer id) {\r\n        String template = problemService.getProblemTemplate(id);\r\n        return ResponseEntity.ok(template);  // Return the problem template as a string\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/src/main/java/com/coderush/problem/ProblemController.java b/backend/src/main/java/com/coderush/problem/ProblemController.java
+--- a/backend/src/main/java/com/coderush/problem/ProblemController.java	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/backend/src/main/java/com/coderush/problem/ProblemController.java	(date 1731378856737)
+@@ -4,7 +4,7 @@
+ import org.springframework.http.ResponseEntity;
+ import org.springframework.web.bind.annotation.*;
+ 
+-import java.util.List;
++import java.util.*;
+ import java.util.Optional;
+ 
+ @RestController
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/CodeRush.iml\" filepath=\"$PROJECT_DIR$/.idea/CodeRush.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision 411e8869c7548698cc40929561b123c00d085334)
++++ b/.idea/modules.xml	(date 1731377500888)
+@@ -2,7 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/.idea/CodeRush.iml" filepath="$PROJECT_DIR$/.idea/CodeRush.iml" />
++      <module fileurl="file://$PROJECT_DIR$/backend/CodeRush.iml" filepath="$PROJECT_DIR$/backend/CodeRush.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file

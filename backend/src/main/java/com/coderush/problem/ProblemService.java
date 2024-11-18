@@ -1,10 +1,10 @@
 package com.coderush.problem;
 
+import com.coderush.mysql.MySqlHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.Optional;
 
 @Service
 public class ProblemService {
@@ -20,14 +20,26 @@ public class ProblemService {
         return (List<Problem>) problemRepository.findAll();
     }
 
-    public Optional<Problem> getProblemById(Integer id) {
-        return problemRepository.findProblemById(id);
+    public Problem getProblemById(Integer id) {
+        // Get the problem details from MySqlHandler
+        String[] problemData = MySqlHandler.getProblem(id);
+
+        // Check if the problem data is valid
+        if (problemData[0] != null && problemData[1] != null && problemData[2] != null) {
+            // Create and return a new Problem object using the retrieved data
+            Problem problem = new Problem();
+            problem.setTitle(problemData[0]);
+            problem.setDescription(problemData[1]);
+            problem.setDifficulty(problemData[2]);
+
+            return problem;
+        } else {
+            // Return null or throw an exception if the problem is not found
+            return null;
+        }
     }
 
     public String getProblemTemplate(Integer problemId) {
-        Problem problem = problemRepository.findProblemById(problemId)
-                .orElseThrow(() -> new RuntimeException("Problem not found"));
-        return problem.getTemplate();  // Return the code template for the problem
+        return MySqlHandler.getStartingCode(problemId);
     }
-
 }

@@ -1,85 +1,49 @@
 package com.coderush.user;
 
-import com.coderush.solution.Solution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
-
 @RestController
-@RequestMapping(path = "api/v1/user")
+@RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
-
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    private UserService userService;
+
+    @PostMapping("/add")
+    public boolean addUser(@RequestParam String username, @RequestParam String passwordHash, @RequestParam String email) {
+        return userService.addUser(username, passwordHash, email);
     }
 
-    @PostMapping(path="/add")
-    public @ResponseBody void addNewUser (@RequestParam User user){
-        userService.addNewUser(user);
+    @PutMapping("/updateScore")
+    public boolean updateScore(@RequestParam String username, @RequestParam int addScore) {
+        return userService.updateScore(username, addScore);
     }
 
-    @GetMapping(path="/all")
-    public @ResponseBody List<User> getUsers() {
-        return userService.getUsers();
+    @GetMapping("/getProblem/{id}")
+    public String[] getProblem(@PathVariable int id) {
+        return userService.getProblem(id);
     }
 
-    // Logs in the user with the provided username and password
-    @PostMapping("/login")
-    public boolean login(@RequestParam String username, @RequestParam String password) {
-        if (userService.validateUserCredentials(username, password)) {
-            System.out.println("User " + username + " logged in successfully.");
-            return true;
-        } else {
-            System.out.println("Invalid username or password.");
-            return false;
-        }
+    @GetMapping("/getUserScore/{username}")
+    public int getUserScore(@PathVariable String username) {
+        return userService.getUserScore(username);
     }
 
-    // Logs out the currently logged-in user
-    @PostMapping("/logout")
-    public void logout(@RequestParam String username) {
-        if (userService.isUserLoggedIn(username)) {
-            userService.logoutUser(username);
-            System.out.println("User " + username + " logged out successfully.");
-        } else {
-            System.out.println("User is already logged out or does not exist.");
-        }
+    @GetMapping("/getUserEmail/{username}")
+    public String getUserEmail(@PathVariable String username) {
+        return userService.getUserEmail(username);
     }
 
-    // Provides access to the code editor for a logged-in user
-    @GetMapping("/access-editor")
-    public void accessEditor(@RequestParam String username) {
-        if (userService.isUserLoggedIn(username)) {
-            System.out.println("User " + username + " is accessing the code editor...");
-            userService.accessEditor(username);
-        } else {
-            System.out.println("Please log in to access the code editor.");
-        }
+    @PutMapping("/resetPassword")
+    public boolean resetPassword(@RequestParam String username, @RequestParam String newPasswordHash) {
+        return userService.resetPassword(username, newPasswordHash);
     }
 
-    // Starts a new match for a logged-in user
-    @PostMapping("/start-match")
-    public void startMatch(@RequestParam String username) {
-        if (userService.isUserLoggedIn(username)) {
-            System.out.println("User " + username + " is starting a new match...");
-            userService.startMatch(username);
-        } else {
-            System.out.println("Please log in to start a match.");
-        }
+    @PutMapping("/changeEmail")
+    public boolean changeEmail(@RequestParam String username, @RequestParam String newEmail) {
+        return userService.changeEmail(username, newEmail);
     }
 
-    // Submits a solution for a logged-in user
-    @PostMapping("/submit-solution")
-    public void submitSolution(@RequestParam String username, @RequestBody Solution solution) {
-        if (userService.isUserLoggedIn(username)) {
-            System.out.println("User " + username + " submitted a solution.");
-            userService.submitSolution(username, solution);
-        } else {
-            System.out.println("Please log in to submit your solution.");
-        }
-    }
+    // Add more endpoints as needed
 }
