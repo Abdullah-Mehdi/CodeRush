@@ -1,56 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Div, Text, Button } from 'atomize';
-import Editor from "@monaco-editor/react"; 
-import axiosInstance from './axiosConfig'; // Import Axios instance for API calls
+import Editor from "@monaco-editor/react";
+import axiosInstance from './axiosConfig';
+import OutputWindow from './components/OutputWindow';
 
 const ProblemPage = ({ isDuelMode }) => {
-  const { id } = useParams(); // Extract problem ID from route
+  const { id } = useParams();
   const [code, setCode] = useState('// Start coding here');
   const [output, setOutput] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
-  const [language, setLanguage] = useState('java'); // Default language set to Java
-  const [timeLeft, setTimeLeft] = useState(900); // Initialize timer (15 minutes = 900 seconds)
+  const [language, setLanguage] = useState('java');
+  const [timeLeft, setTimeLeft] = useState(900);
+  const [processing, setProcessing] = useState(false);
 
-  // Timer logic: Countdown only in Duel mode
   useEffect(() => {
     if (isDuelMode && timeLeft > 0) {
-      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000); // Decrease timer every second
-      return () => clearInterval(timer); // Clean up the timer on unmount
+      const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
+      return () => clearInterval(timer);
     }
   }, [isDuelMode, timeLeft]);
 
-  // Function to handle running code
   const handleRunCode = async () => {
+    setProcessing(true);
     try {
       const response = await axiosInstance.post('/problem/run', {
         code,
-        language, // Send selected programming language along with the code
+        language,
+        problemId: id
       });
-      setOutput(response.data);  // Display output from backend
+      const result = JSON.parse(response.data);
+      setOutput(result.stdout || result.stderr || 'No output');
     } catch (error) {
       console.error('Error running code:', error);
-      setOutput(error.response ? error.response.data : 'Error running code.');
+      setOutput('Error running code. Please try again.');
+    } finally {
+      setProcessing(false);
     }
   };
 
-  // Function to handle checking solution correctness
   const handleCheckSolution = async () => {
     try {
       const response = await axiosInstance.post('/problem/check', {
         problemId: id,
         submittedSolution: code,
       });
-      setIsCorrect(response.data);  // Display whether the solution is correct
+      setIsCorrect(response.data);
     } catch (error) {
       console.error('Error checking solution:', error);
       setIsCorrect(false);
     }
   };
 
+  // Function to handle language change
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+  };
+
   return (
     <Div d="flex" flexDir="row" minH="100vh" p="2rem">
-      
       {/* Left Side: Problem Details */}
       <Div w="50%" p="1rem" border="1px solid #e0e0e0" shadow="4" rounded="lg">
         <Text tag="h2" textSize="title" m={{ b: "1rem" }}>Problem {id}</Text>
@@ -59,68 +67,71 @@ const ProblemPage = ({ isDuelMode }) => {
           Return indices of two numbers that add up to a target value in an array.
         </Text>
         <Text textSize="caption" textColor="gray500" m={{ b: "1rem" }}>Difficulty: Easy</Text>
-      </Div>
-
-      {/* Right Side: Code Editor and Run Code Button */}
-      <Div w="50%" p="3rem" d="flex" flexDir="column" align="center" border="1px solid #e0e0e0" shadow="4" rounded="lg" m={{ l: "5rem" }}>
         
-        {/* Monaco Code Editor */}
-        <Editor
-          height="400px"
-          defaultLanguage={language}
-          value={code}
-          onChange={(newValue) => setCode(newValue)}
-        />
-
-        {/* Language Selector */}
-        <select value={language} onChange={(e) => setLanguage(e.target.value)} style={{ marginTop: '10px' }}>
+        {/* Language Selection Dropdown */}
+        <select
+          onChange={handleLanguageChange}
+          value={language}
+          style={{
+            marginBottom: '1rem',
+            padding: '0.5rem',
+            borderRadius: '4px',
+            border: '1px solid #e0e0e0'
+          }}
+        >
           <option value="java">Java</option>
           <option value="python">Python</option>
-          {/* Add more languages as needed */}
         </select>
+      </Div>
 
-        {/* Run Code Button */}
-        <Button bg="info700" hoverBg="info800" textColor="white" onClick={handleRunCode} m={{ t: "1rem" }}>
-          Run Code
+
+      {/* Right Side: Code Editor and Output */}
+      <Div w="50%" p="1rem">
+        <Editor
+          height="50vh"
+          language={language}
+          value={code}
+          onChange={setCode}
+        />
+        <Button 
+          onClick={handleRunCode} 
+          m={{ y: "1rem" }}
+          bg="info700"
+          hoverBg="info800"
+          textColor="white"
+          disabled={processing}
+        >
+          {processing ? 'Running...' : 'Run Code'}
         </Button>
-
-        {/* Check Solution Button */}
-        <Button bg="success700" hoverBg="success800" textColor="white" onClick={handleCheckSolution} m={{ t: "1rem" }}>
-          Check Solution
-        </Button>
-
-        {/* Output Section */}
-        {output && (
-          <Div m={{ t: "2rem", b: "2rem", x: "auto", y: "auto"}}>
-            <Text tag="h3">Output:</Text>
-            <pre>{output}</pre>
-          </Div>
-        )}
-
-        {/* Solution Correctness Section */}
-        {isCorrect !== null && (
-          <Div m={{ t: "2rem", b: "2rem", x: "auto", y: "auto"}}>
-            {isCorrect ? (
-              <Text tag="h3" textColor="success700">Correct Solution!</Text>
-            ) : (
-              <Text tag="h3" textColor="danger700">Incorrect Solution.</Text>
-            )}
-          </Div>
-        )}
-
-        {/* Timer Section (Only for Duel Mode) */}
+        <OutputWindow output={output} />
         {isDuelMode && (
-          <Div d='flex' justify='center' align='center' m={{ t: '2rem' }}>
-            <Text tag='h3' textColor='danger700'>
-              Time Left: {Math.floor(timeLeft / 60)}:{String(timeLeft % 60).padStart(2, '0')}
-            </Text>
-          </Div>
+          <Text textSize="body" m={{ t: "1rem" }}>
+            Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}
+          </Text>
         )}
-        
+        <Button 
+          onClick={handleCheckSolution} 
+          m={{ t: "1rem" }}
+          bg="success700"
+          hoverBg="success800"
+          textColor="white"
+        >
+          Submit Solution
+        </Button>
+        {isCorrect !== null && (
+          <Text 
+            textSize="body" 
+            textColor={isCorrect ? "success700" : "danger700"} 
+            m={{ t: "1rem" }}
+          >
+            {isCorrect ? "Correct solution!" : "Incorrect solution. Try again."}
+          </Text>
+        )}
       </Div>
     </Div>
   );
 };
 
 export default ProblemPage;
+
 

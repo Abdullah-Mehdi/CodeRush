@@ -4,7 +4,9 @@ WORKDIR /app
 
 # Install dependencies including @monaco-editor/react, axios, and react-router-dom
 COPY package*.json ./
-RUN npm install @monaco-editor/react axios react-router-dom react-helmet && npm install
+RUN npm install @monaco-editor/react axios react-router-dom react-helmet && \
+    npm install --save-dev @babel/plugin-proposal-private-property-in-object@^7.21.11 && \
+    npm install
 
 COPY . .
 
