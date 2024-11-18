@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { Div, Text, Button, Input } from 'atomize';
-import { Link, useNavigate } from 'react-router-dom';
 import axiosInstance from './axiosConfig';
+import SuccessModal from './components/SuccessModal';
 
 function LoginSignup() {
     const [isLoginMode, setIsLoginMode] = useState(true);
@@ -9,11 +10,12 @@ function LoginSignup() {
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async () => {
         try {
-            setErrorMessage(''); // Clear any previous errors
+            setErrorMessage('');
             
             if (isLoginMode) {
                 // Login
@@ -24,21 +26,18 @@ function LoginSignup() {
                 
                 if (response.data) {
                     localStorage.setItem('user', JSON.stringify(response.data));
-                    navigate('/problem-library');
+                    setIsModalOpen(true); // Open the success modal
+                    // Navigation will happen after modal is closed
                 }
             } else {
                 // Signup
-                console.log('Attempting signup with:', { username, email });
                 const response = await axiosInstance.post('/auth/signup', {
                     username,
                     email,
                     password
                 });
                 
-                console.log('Signup response:', response);
-                
                 if (response.data) {
-                    // Clear form
                     setUsername('');
                     setEmail('');
                     setPassword('');
@@ -48,13 +47,17 @@ function LoginSignup() {
             }
         } catch (error) {
             console.error('Auth error:', error);
-            console.error('Error response:', error.response);
             setErrorMessage(
                 error.response?.data?.message || 
                 error.response?.data || 
                 (isLoginMode ? 'Login failed. Please check your credentials.' : 'Signup failed. Please try again.')
             );
         }
+    };
+
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        navigate('/problem-library'); // Navigate after modal is closed
     };
     
 
@@ -214,6 +217,55 @@ function LoginSignup() {
                 <Text textSize="body" textColor="gray800">
                     Designed & Developed by Team 6
                 </Text>
+            </Div>
+
+                {/* Success Modal */}
+                <Div
+                pos="fixed"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                d={isModalOpen ? "flex" : "none"}
+                justify="center"
+                align="center"
+                bg="rgba(0,0,0,0.5)"
+                zIndex="1000"
+                onClick={handleModalClose}
+            >
+                <Div
+                    bg="white"
+                    p="2rem"
+                    rounded="lg"
+                    shadow="4"
+                    maxW="400px"
+                    onClick={e => e.stopPropagation()}
+                >
+                    <Text
+                        tag="h2"
+                        textSize="title"
+                        m={{ b: "1rem" }}
+                        textColor="success700"
+                    >
+                        Login Successful!
+                    </Text>
+                    <Text
+                        textSize="paragraph"
+                        m={{ b: "1.5rem" }}
+                        textColor="gray800"
+                    >
+                        Welcome! You can now start coding and solving problems.
+                    </Text>
+                    <Button
+                        onClick={handleModalClose}
+                        bg="info700"
+                        hoverBg="info800"
+                        w="100%"
+                        textColor="white"
+                    >
+                        Let's Start Coding!
+                    </Button>
+                </Div>
             </Div>
         </Div>
     );
