@@ -8,6 +8,7 @@ import LoginSignup from './LoginSignup';
 import './index.css';
 
 function App() {
+  // Add this useEffect hook to set the document title
   useEffect(() => {
     document.title = '\u{1F4BB} CodeRush';  // Unicode for computer emoji
   }, []);
