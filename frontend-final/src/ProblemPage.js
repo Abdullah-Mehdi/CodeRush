@@ -94,9 +94,11 @@ const ProblemPage = ({ isDuelMode }) => {
     const [pyodide, setPyodide] = useState(null);
     const [currentProblem, setCurrentProblem] = useState(null);
     const [isTimeUp, setIsTimeUp] = useState(false);
-    const [messages, setMessages] = useState([]); // Web socket for real-time messaging
-    const [playerMessage, setPlayerMessage] = useState(''); // Web socket for real-time messaging
-    const [socket, setSocket] = useState(null); // Web socket for real-time messaging
+
+    // Web socket for duel mode
+    const [messages, setMessages] = useState([]); // Store duel updates
+    const [socket, setSocket] = useState(null); // WebSocket instance
+
 
     // Helper function to compare arrays - definining it before use
     const arraysEqual = (arr1, arr2) => {
@@ -128,48 +130,37 @@ const ProblemPage = ({ isDuelMode }) => {
         setCurrentProblem(problem);
     }, [id]);
 
-    {/* Web socket for duel mode*/}
-    const startDuel = () => {
-        const duelMessage = {
-            type: "START_DUEL",
-            duelId: "duel123", // Example ID
-            playerA: "Player1",
-            playerB: "Player2"
-        };
-        socket.send(JSON.stringify(duelMessage));
-    };
-    
-    {/* Web socket for duel mode*/}
-    const submitSolution = () => {
-        const duelMessage = {
-            type: "SUBMIT_SOLUTION",
-            duelId: "duel123",
-            player: "Player1",
-            solution: code
-        };
-        socket.send(JSON.stringify(duelMessage));
-    };    
-    
-    {/* Web socket for real-time messaging*/}
+    // Initialize WebSocket for duel mode
     useEffect(() => {
-        // Create WebSocket connection
-        const ws = new WebSocket('ws://localhost:8080/ws/duel');
-        setSocket(ws);
+        if (isDuelMode) {
+            const ws = new WebSocket('ws://localhost:8080/ws/duel');
+            setSocket(ws);
 
-        // Listen for messages
-        ws.onmessage = (event) => {
-            setMessages((prevMessages) => [...prevMessages, event.data]);
-        };
+            // Handle incoming messages
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                setMessages((prev) => [...prev, data.message]);
+            };
 
-        // Cleanup on component unmount
-        return () => ws.close();
-    }, []);
+            ws.onclose = () => {
+                console.log('WebSocket connection closed.');
+            };
 
-    {/* Web socket for real-time messaging*/}
-    const sendMessage = () => {
-        if (socket && playerMessage.trim()) {
-            socket.send(playerMessage);
-            setPlayerMessage(''); // Clear input field
+            ws.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+
+            return () => ws.close(); // Clean up WebSocket on unmount
+        }
+    }, [isDuelMode]);
+
+    // Send a duel update to the server
+    const sendDuelUpdate = (message) => {
+        if (socket && socket.readyState === WebSocket.OPEN) {
+            const update = { type: 'DUEL_UPDATE', message };
+            socket.send(JSON.stringify(update));
+        } else {
+            console.error('WebSocket is not open. Cannot send duel update.');
         }
     };
 
@@ -181,6 +172,7 @@ const ProblemPage = ({ isDuelMode }) => {
                     if (prev <= 1) {
                         clearInterval(timer);
                         setIsTimeUp(true);
+                        sendDuelUpdate("Time's up! Duel has ended.");
                         return 0;
                     }
                     return prev - 1;
@@ -511,61 +503,44 @@ print(str(result).lower())
                     </Div>
                 )}
 
-                {/* Web socket for real-time messaging*/}
-                {isDuelMode && (
-                    <Div
-                        bg="gray100"
-                        p="1rem"
-                        rounded="md"
-                        m={{ t: "1rem" }}
-                        border="1px solid"
-                        borderColor="gray300"
-                        h="200px"
-                        overflow="scroll"
-                    >
-                        <Text textSize="subheader" m={{ b: "1rem" }}>
-                            Real-Time Messages:
-                        </Text>
-                        {messages.length > 0 ? (
-                            messages.map((msg, index) => (
-                                <Text key={index} textSize="body" textColor="gray800">
-                                    {msg}
-                                </Text>
-                            ))
-                        ) : (
-                            <Text textSize="body" textColor="gray500">
-                                No messages yet.
+                {/* Duel Updates */}
+                <Div
+                    bg="gray100"
+                    p="1rem"
+                    rounded="md"
+                    m={{ t: "1rem" }}
+                    border="1px solid"
+                    borderColor="gray300"
+                    h="200px"
+                    overflow="scroll"
+                >
+                    <Text textSize="subheader" m={{ b: "1rem" }}>
+                        Duel Updates:
+                    </Text>
+                    {messages.length > 0 ? (
+                        messages.map((msg, index) => (
+                            <Text key={index} textSize="body" textColor="gray800">
+                                {msg}
                             </Text>
-                        )}
-                    </Div>
-                )}
+                        ))
+                    ) : (
+                        <Text textSize="body" textColor="gray500">
+                            No updates yet.
+                        </Text>
+                    )}
+                </Div>
 
-                {/* Web socket for real-time messaging*/}
-                {/* Message Input and Send Button */}
+                {/* Timer */}
                 {isDuelMode && (
-                    <Div d="flex" m={{ t: "1rem" }}>
-                        <input
-                            type="text"
-                            value={playerMessage}
-                            onChange={(e) => setPlayerMessage(e.target.value)}
-                            placeholder="Type a message..."
-                            style={{
-                                flex: 1,
-                                padding: '0.5rem',
-                                marginRight: '0.5rem',
-                                borderRadius: '4px',
-                                border: '1px solid #ccc',
-                            }}
-                        />
-                        <Button
-                            onClick={sendMessage}
-                            bg="info700"
-                            hoverBg="info800"
-                            textColor="white"
-                        >
-                            Send
-                        </Button>
-                    </Div>
+                    <Text
+                        textSize="body"
+                        m={{ t: "1rem" }}
+                        textColor={isTimeUp ? 'danger700' : 'gray800'}
+                        d="flex"
+                        justify="center"
+                        bold={isTimeUp}
+                    >
+                    </Text>
                 )}
 
                 {/* Solution Result Message */}
@@ -584,4 +559,3 @@ print(str(result).lower())
 };
 
 export default ProblemPage;
-
