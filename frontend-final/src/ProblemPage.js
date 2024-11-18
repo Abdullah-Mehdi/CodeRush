@@ -34,52 +34,52 @@ const testCases = {
     ],
 
     2: [ // Longest Common Prefix
-      {
-          input: {
-              strs: ["flower", "flow", "flight"]
-          },
-          expected: "fl"
-      },
-      {
-          input: {
-              strs: ["dog", "racecar", "car"]
-          },
-          expected: ""
-      },
-      {
-          input: {
-              strs: ["interspecies", "interstellar", "interstate"]
-          },
-          expected: "inters"
-      }
-  ],
+        {
+            input: {
+                strs: ["flower", "flow", "flight"]
+            },
+            expected: "fl"
+        },
+        {
+            input: {
+                strs: ["dog", "racecar", "car"]
+            },
+            expected: ""
+        },
+        {
+            input: {
+                strs: ["interspecies", "interstellar", "interstate"]
+            },
+            expected: "inters"
+        }
+    ],
 
-  3: [ // Palindrome Number test cases
-    {
-        input: {
-            num: 121
+    3: [ // Palindrome Number test cases
+        {
+            input: {
+                num: 121
+            },
+            expected: true
         },
-        expected: true
-    },
-    {
-        input: {
-            num: -121
+        {
+            input: {
+                num: -121
+            },
+            expected: false
         },
-        expected: false
-    },
-    {
-        input: {
-            num: 10
+        {
+            input: {
+                num: 10
+            },
+            expected: false
         },
-        expected: false
-    },
-    {
-        input: {
-            num: 12321
-        },
-        expected: true
-    }
-  ]
+        {
+            input: {
+                num: 12321
+            },
+            expected: true
+        }
+    ]
     // Add test cases for other problems as needed
 };
 
@@ -93,16 +93,19 @@ const ProblemPage = ({ isDuelMode }) => {
     const [processing, setProcessing] = useState(false);
     const [pyodide, setPyodide] = useState(null);
     const [currentProblem, setCurrentProblem] = useState(null);
-    const [isTimeUp, setIsTimeUp] = useState(false); 
+    const [isTimeUp, setIsTimeUp] = useState(false);
+    const [messages, setMessages] = useState([]); // Web socket for real-time messaging
+    const [playerMessage, setPlayerMessage] = useState(''); // Web socket for real-time messaging
+    const [socket, setSocket] = useState(null); // Web socket for real-time messaging
 
-      // Helper function to compare arrays - definining it before use
-      const arraysEqual = (arr1, arr2) => {
+    // Helper function to compare arrays - definining it before use
+    const arraysEqual = (arr1, arr2) => {
         if (arr1.length !== arr2.length) return false;
         const sorted1 = [...arr1].sort();
         const sorted2 = [...arr2].sort();
         return sorted1.every((value, index) => value === sorted2[index]);
     };
-    
+
     // Initialize Pyodide
     useEffect(() => {
         const loadPyodide = async () => {
@@ -125,22 +128,67 @@ const ProblemPage = ({ isDuelMode }) => {
         setCurrentProblem(problem);
     }, [id]);
 
+    {/* Web socket for duel mode*/}
+    const startDuel = () => {
+        const duelMessage = {
+            type: "START_DUEL",
+            duelId: "duel123", // Example ID
+            playerA: "Player1",
+            playerB: "Player2"
+        };
+        socket.send(JSON.stringify(duelMessage));
+    };
+    
+    {/* Web socket for duel mode*/}
+    const submitSolution = () => {
+        const duelMessage = {
+            type: "SUBMIT_SOLUTION",
+            duelId: "duel123",
+            player: "Player1",
+            solution: code
+        };
+        socket.send(JSON.stringify(duelMessage));
+    };    
+    
+    {/* Web socket for real-time messaging*/}
+    useEffect(() => {
+        // Create WebSocket connection
+        const ws = new WebSocket('ws://localhost:8080/ws/duel');
+        setSocket(ws);
+
+        // Listen for messages
+        ws.onmessage = (event) => {
+            setMessages((prevMessages) => [...prevMessages, event.data]);
+        };
+
+        // Cleanup on component unmount
+        return () => ws.close();
+    }, []);
+
+    {/* Web socket for real-time messaging*/}
+    const sendMessage = () => {
+        if (socket && playerMessage.trim()) {
+            socket.send(playerMessage);
+            setPlayerMessage(''); // Clear input field
+        }
+    };
+
     // Timer logic with time up handling
     useEffect(() => {
-      if (isDuelMode && timeLeft > 0) {
-          const timer = setInterval(() => {
-              setTimeLeft(prev => {
-                  if (prev <= 1) {
-                      clearInterval(timer);
-                      setIsTimeUp(true);
-                      return 0;
-                  }
-                  return prev - 1;
-              });
-          }, 1000);
-          return () => clearInterval(timer);
-      }
-  }, [isDuelMode]);
+        if (isDuelMode && timeLeft > 0) {
+            const timer = setInterval(() => {
+                setTimeLeft(prev => {
+                    if (prev <= 1) {
+                        clearInterval(timer);
+                        setIsTimeUp(true);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+            return () => clearInterval(timer);
+        }
+    }, [isDuelMode]);
 
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value);
@@ -161,7 +209,7 @@ const ProblemPage = ({ isDuelMode }) => {
                 import io
                 sys.stdout = io.StringIO()
             `);
-            
+
             await pyodide.runPythonAsync(code);
             const stdout = pyodide.runPython("sys.stdout.getvalue()");
             setOutput(stdout || 'No output');
@@ -173,38 +221,38 @@ const ProblemPage = ({ isDuelMode }) => {
     };
 
     const handleSubmitSolution = async () => {
-      if (!pyodide) {
-        setOutput('Python environment is not ready yet. Please wait...');
-        return;
-    }
-
-    setProcessing(true);
-    try {
-        const currentTestCases = testCases[parseInt(id)];
-        if (!currentTestCases) {
-            setOutput('No test cases found for this problem.');
-            setIsCorrect(false);
+        if (!pyodide) {
+            setOutput('Python environment is not ready yet. Please wait...');
             return;
         }
 
-        let allTestsPassed = true;
-        let testResults = [];
+        setProcessing(true);
+        try {
+            const currentTestCases = testCases[parseInt(id)];
+            if (!currentTestCases) {
+                setOutput('No test cases found for this problem.');
+                setIsCorrect(false);
+                return;
+            }
 
-        for (const testCase of currentTestCases) {
-            try {
-                // Reset stdout for each test case
-                pyodide.runPython(`
+            let allTestsPassed = true;
+            let testResults = [];
+
+            for (const testCase of currentTestCases) {
+                try {
+                    // Reset stdout for each test case
+                    pyodide.runPython(`
                     import sys
                     import io
                     sys.stdout = io.StringIO()
                 `);
 
-                // Different wrapper based on problem ID
-                let wrapper;
-                const problemId = parseInt(id);
-                
-                if (problemId === 1) {
-                    wrapper = `
+                    // Different wrapper based on problem ID
+                    let wrapper;
+                    const problemId = parseInt(id);
+
+                    if (problemId === 1) {
+                        wrapper = `
 ${code}
 
 # Test case input
@@ -215,8 +263,8 @@ target = ${testCase.input.target}
 result = two_sum(nums, target)
 print(result)
                     `;
-                } else if (problemId === 2) {
-                    wrapper = `
+                    } else if (problemId === 2) {
+                        wrapper = `
 ${code}
 
 # Test case input
@@ -226,8 +274,8 @@ strs = ${JSON.stringify(testCase.input.strs)}
 result = longest_common_prefix(strs)
 print(result)
                     `;
-                } else if (problemId === 3) {
-                    wrapper = `
+                    } else if (problemId === 3) {
+                        wrapper = `
 ${code}
 
 # Test case input
@@ -237,106 +285,106 @@ num = ${testCase.input.num}
 result = is_palindrome(num)
 print(str(result).lower())
                     `;
-                }
+                    }
 
-                await pyodide.runPythonAsync(wrapper);
-                const output = pyodide.runPython("sys.stdout.getvalue()").trim();
-                
-                // Different comparison logic based on problem ID
-                let isTestPassed;
-                if (problemId === 1) {
-                    const result = JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']'));
-                    isTestPassed = arraysEqual(result, testCase.expected);
-                } else if (problemId === 2) {
-                    isTestPassed = output === `"${testCase.expected}"` || 
-                                 output === `'${testCase.expected}'` || 
-                                 output === testCase.expected;
-                } else if (problemId === 3) {
-                    const resultBool = output.trim() === 'true';
-                    isTestPassed = resultBool === testCase.expected;
-                }
+                    await pyodide.runPythonAsync(wrapper);
+                    const output = pyodide.runPython("sys.stdout.getvalue()").trim();
 
-                testResults.push({
-                    input: testCase.input,
-                    expected: testCase.expected,
-                    output: problemId === 3 ? output.trim() === 'true' :
-                           problemId === 1 ? JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']')) :
-                           output.replace(/['"]/g, ''),
-                    passed: isTestPassed
-                });
+                    // Different comparison logic based on problem ID
+                    let isTestPassed;
+                    if (problemId === 1) {
+                        const result = JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']'));
+                        isTestPassed = arraysEqual(result, testCase.expected);
+                    } else if (problemId === 2) {
+                        isTestPassed = output === `"${testCase.expected}"` ||
+                            output === `'${testCase.expected}'` ||
+                            output === testCase.expected;
+                    } else if (problemId === 3) {
+                        const resultBool = output.trim() === 'true';
+                        isTestPassed = resultBool === testCase.expected;
+                    }
 
-                if (!isTestPassed) {
+                    testResults.push({
+                        input: testCase.input,
+                        expected: testCase.expected,
+                        output: problemId === 3 ? output.trim() === 'true' :
+                            problemId === 1 ? JSON.parse(output.replace(/\(/g, '[').replace(/\)/g, ']')) :
+                                output.replace(/['"]/g, ''),
+                        passed: isTestPassed
+                    });
+
+                    if (!isTestPassed) {
+                        allTestsPassed = false;
+                    }
+
+                } catch (error) {
+                    testResults.push({
+                        input: testCase.input,
+                        error: error.message,
+                        passed: false
+                    });
                     allTestsPassed = false;
                 }
-
-            } catch (error) {
-                testResults.push({
-                    input: testCase.input,
-                    error: error.message,
-                    passed: false
-                });
-                allTestsPassed = false;
             }
+
+            const resultOutput = formatTestResults(testResults);
+            setOutput(resultOutput);
+            setIsCorrect(allTestsPassed);
+
+        } catch (error) {
+            setOutput(`Error: ${error.message}`);
+            setIsCorrect(false);
+        } finally {
+            setProcessing(false);
         }
+    };
 
-        const resultOutput = formatTestResults(testResults);
-        setOutput(resultOutput);
-        setIsCorrect(allTestsPassed);
+    const formatTestResults = (results) => {
+        const problemId = parseInt(id);
+        return results.map((result, index) => {
+            if (result.error) {
+                if (problemId === 1) {
+                    return `Test Case ${index + 1}: Failed\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nError: ${result.error}\n`;
+                } else if (problemId === 2) {
+                    return `Test Case ${index + 1}: Failed\nInput: strs=${JSON.stringify(result.input.strs)}\nError: ${result.error}\n`;
+                } else if (problemId === 3) {
+                    return `Test Case ${index + 1}: Failed\nInput: num=${result.input.num}\nError: ${result.error}\n`;
+                }
+            }
 
-    } catch (error) {
-        setOutput(`Error: ${error.message}`);
-        setIsCorrect(false);
-    } finally {
-        setProcessing(false);
-    }
-};
-
-const formatTestResults = (results) => {
-    const problemId = parseInt(id);
-    return results.map((result, index) => {
-        if (result.error) {
             if (problemId === 1) {
-                return `Test Case ${index + 1}: Failed\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nError: ${result.error}\n`;
+                return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nExpected: ${JSON.stringify(result.expected)}\nGot: ${JSON.stringify(result.output)}\n`;
             } else if (problemId === 2) {
-                return `Test Case ${index + 1}: Failed\nInput: strs=${JSON.stringify(result.input.strs)}\nError: ${result.error}\n`;
+                return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: strs=${JSON.stringify(result.input.strs)}\nExpected: "${result.expected}"\nGot: "${result.output}"\n`;
             } else if (problemId === 3) {
-                return `Test Case ${index + 1}: Failed\nInput: num=${result.input.num}\nError: ${result.error}\n`;
+                return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: num=${result.input.num}\nExpected: ${result.expected}\nGot: ${result.output}\n`;
             }
-        }
-        
-        if (problemId === 1) {
-            return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: nums=${JSON.stringify(result.input.nums)}, target=${result.input.target}\nExpected: ${JSON.stringify(result.expected)}\nGot: ${JSON.stringify(result.output)}\n`;
-        } else if (problemId === 2) {
-            return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: strs=${JSON.stringify(result.input.strs)}\nExpected: "${result.expected}"\nGot: "${result.output}"\n`;
-        } else if (problemId === 3) {
-            return `Test Case ${index + 1}: ${result.passed ? 'Passed' : 'Failed'}\nInput: num=${result.input.num}\nExpected: ${result.expected}\nGot: ${result.output}\n`;
-        }
-    }).join('\n');
-};
+        }).join('\n');
+    };
 
-// Add initial code template based on problem ID
-useEffect(() => {
-    const problemId = parseInt(id);
-    if (problemId === 1) {
-        setCode(`def two_sum(nums, target):
+    // Add initial code template based on problem ID
+    useEffect(() => {
+        const problemId = parseInt(id);
+        if (problemId === 1) {
+            setCode(`def two_sum(nums, target):
     # Write your solution here
     # Return indices of two numbers that add up to target
     # Example: nums = [2,7,11,15], target = 9 should return [0,1]
     pass`);
-    } else if (problemId === 2) {
-        setCode(`def longest_common_prefix(strs):
+        } else if (problemId === 2) {
+            setCode(`def longest_common_prefix(strs):
     # Write your solution here
     # Return the longest common prefix string
     # Example: ["flower", "flow", "flight"] should return "fl"
     pass`);
-    } else if (problemId === 3) {
-      setCode(`def is_palindrome(num):
+        } else if (problemId === 3) {
+            setCode(`def is_palindrome(num):
     # Write your solution here
     # Return True if the number is a palindrome, False otherwise
     # Example: 121 should return True because it reads the same forward and backward
     pass`);
-    }
-}, [id]);
+        }
+    }, [id]);
 
     if (!currentProblem) {
         return <Div>Loading problem...</Div>;
@@ -353,7 +401,7 @@ useEffect(() => {
                 <Text textSize="caption" textColor="gray500" m={{ b: "1rem" }}>
                     Difficulty: {currentProblem.difficulty}
                 </Text>
-                
+
                 {/* Language Selection */}
                 <select
                     onChange={handleLanguageChange}
@@ -381,8 +429,8 @@ useEffect(() => {
                     theme="vs-dark"
                 />
                 <Div d="flex" justify="space-between" m={{ y: "1rem" }}>
-                    <Button 
-                        onClick={handleRunCode} 
+                    <Button
+                        onClick={handleRunCode}
                         bg="info700"
                         hoverBg="info800"
                         textColor="white"
@@ -391,7 +439,7 @@ useEffect(() => {
                     >
                         {processing ? 'Running...' : 'Run Code'}
                     </Button>
-                    <Button 
+                    <Button
                         onClick={handleSubmitSolution}
                         bg="success700"
                         hoverBg="success800"
@@ -413,8 +461,8 @@ useEffect(() => {
 
                 {/* Timer Display */}
                 {isDuelMode && (
-                    <Text 
-                        textSize="body" 
+                    <Text
+                        textSize="body"
                         m={{ t: "1rem" }}
                         textColor={isTimeUp ? "danger700" : "gray800"}
                         d="flex"
@@ -446,11 +494,11 @@ useEffect(() => {
                                 <li>Copy your code and try it in Practice mode</li>
                             </ul>
                         </Text>
-                        <Link 
+                        <Link
                             to={`/practice-mode/${id}`}
                             style={{ textDecoration: 'none' }}
                         >
-                            <Button 
+                            <Button
                                 bg="info700"
                                 hoverBg="info800"
                                 textColor="white"
@@ -463,11 +511,68 @@ useEffect(() => {
                     </Div>
                 )}
 
+                {/* Web socket for real-time messaging*/}
+                {isDuelMode && (
+                    <Div
+                        bg="gray100"
+                        p="1rem"
+                        rounded="md"
+                        m={{ t: "1rem" }}
+                        border="1px solid"
+                        borderColor="gray300"
+                        h="200px"
+                        overflow="scroll"
+                    >
+                        <Text textSize="subheader" m={{ b: "1rem" }}>
+                            Real-Time Messages:
+                        </Text>
+                        {messages.length > 0 ? (
+                            messages.map((msg, index) => (
+                                <Text key={index} textSize="body" textColor="gray800">
+                                    {msg}
+                                </Text>
+                            ))
+                        ) : (
+                            <Text textSize="body" textColor="gray500">
+                                No messages yet.
+                            </Text>
+                        )}
+                    </Div>
+                )}
+
+                {/* Web socket for real-time messaging*/}
+                {/* Message Input and Send Button */}
+                {isDuelMode && (
+                    <Div d="flex" m={{ t: "1rem" }}>
+                        <input
+                            type="text"
+                            value={playerMessage}
+                            onChange={(e) => setPlayerMessage(e.target.value)}
+                            placeholder="Type a message..."
+                            style={{
+                                flex: 1,
+                                padding: '0.5rem',
+                                marginRight: '0.5rem',
+                                borderRadius: '4px',
+                                border: '1px solid #ccc',
+                            }}
+                        />
+                        <Button
+                            onClick={sendMessage}
+                            bg="info700"
+                            hoverBg="info800"
+                            textColor="white"
+                        >
+                            Send
+                        </Button>
+                    </Div>
+                )}
+
                 {/* Solution Result Message */}
                 {isCorrect !== null && (
-                    <Text 
-                        textSize="body" 
-                        textColor={isCorrect ? "success700" : "danger700"} 
+                    <Text
+                        textSize="body"
+                        textColor={isCorrect ? "success700" : "danger700"}
                         m={{ t: "1rem" }}
                     >
                         {isCorrect ? "All test cases passed!" : "Some test cases failed. Please try again."}
@@ -479,3 +584,4 @@ useEffect(() => {
 };
 
 export default ProblemPage;
+
