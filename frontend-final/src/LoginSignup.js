@@ -1,48 +1,80 @@
 import React, { useState } from 'react';
-import { Div, Text, Button, Anchor, Input, Icon } from 'atomize';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { Div, Text, Button, Input } from 'atomize';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosInstance from './axiosConfig';
 
 function LoginSignup() {
-    const [isLoginMode, setIsLoginMode] = useState(true); // Toggle between Login and Signup
+    const [isLoginMode, setIsLoginMode] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
-    // Handle form submission
     const handleSubmit = async () => {
-        if (isLoginMode) {
-            // Login API call
-            try {
-                const response = await axios.post('http://localhost:8080/auth/login', {
+        try {
+            setErrorMessage(''); // Clear any previous errors
+            
+            if (isLoginMode) {
+                // Login
+                const response = await axiosInstance.post('/auth/login', {
                     email,
-                    password,
+                    password
                 });
-                alert('Login successful!');
-                localStorage.setItem('token', response.data.token); // Store token
-                window.location.href = '/problem-library'; // Redirect
-            } catch (error) {
-                setErrorMessage('Login failed. Please check your credentials.');
-                console.error(error);
-            }
-        } else {
-            // Signup API call
-            try {
-                await axios.post('http://localhost:8080/auth/signup', {
+                
+                if (response.data) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    navigate('/problem-library');
+                }
+            } else {
+                // Signup
+                console.log('Attempting signup with:', { username, email });
+                const response = await axiosInstance.post('/auth/signup', {
                     username,
                     email,
-                    password,
+                    password
                 });
-                alert('Signup successful! Please login.');
-                setIsLoginMode(true); // Switch to login mode
-            } catch (error) {
-                setErrorMessage('Signup failed. Please try again.');
-                console.error(error);
+                
+                console.log('Signup response:', response);
+                
+                if (response.data) {
+                    // Clear form
+                    setUsername('');
+                    setEmail('');
+                    setPassword('');
+                    setIsLoginMode(true);
+                    setErrorMessage('Signup successful! Please login.');
+                }
             }
+        } catch (error) {
+            console.error('Auth error:', error);
+            console.error('Error response:', error.response);
+            setErrorMessage(
+                error.response?.data?.message || 
+                error.response?.data || 
+                (isLoginMode ? 'Login failed. Please check your credentials.' : 'Signup failed. Please try again.')
+            );
         }
     };
+    
 
+    // Form validation
+    const validateForm = () => {
+        if (!email || !password || (!isLoginMode && !username)) {
+            setErrorMessage('Please fill in all fields');
+            return false;
+        }
+        if (!email.includes('@')) {
+            setErrorMessage('Please enter a valid email');
+            return false;
+        }
+        if (password.length < 6) {
+            setErrorMessage('Password must be at least 6 characters');
+            return false;
+        }
+        return true;
+    };
+    
     return (
         <Div d="flex" flexDir="column" minH="100vh">
             {/* Header and Navigation */}

@@ -1,4 +1,4 @@
-package com.coderush.match;
+/* package com.coderush.match;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,4 +23,4 @@ public class MatchController {
     public String endMatch() {
         return matchService.endMatch();
     }
-}
+} */
