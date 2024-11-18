@@ -112,7 +112,12 @@ function LoginSignup() {
 
                     {/* Error Message */}
                     {errorMessage && (
-                        <Text textColor="danger700" textAlign="center" m={{ b: "1rem" }}>
+                        <Text 
+                            textSize="body" 
+                            textColor={errorMessage.includes('successful') ? "success700" : "danger700"}
+                            m={{ t: "1rem" }}
+                            textAlign="center"
+                        >
                             {errorMessage}
                         </Text>
                     )}
