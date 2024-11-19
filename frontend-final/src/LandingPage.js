@@ -1,8 +1,10 @@
 import React from 'react'; // Importing React
 import { Div, Text, Button, Anchor, Icon } from 'atomize'; // Importing Atomize components
 import { Link } from 'react-router-dom'; // Importing Link for navigation
+import UserProfileIcon from './components/UserProfileIcon'; // Importing UserProfileIcon component
 
 function LandingPage() {
+  const user = JSON.parse(localStorage.getItem('user')); // Get user data from local storage
   return (
     <Div d="flex" flexDir="column" minH="100vh">
       
@@ -20,16 +22,21 @@ function LandingPage() {
         </Text>
 
         {/* Navigation Links */}
-        <Div d="flex">
+        <Div d="flex" align="center">
           <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Home
           </Link>
           <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Problem Library
           </Link>
-          <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
-            Login or Signup
-          </Link>
+          <Link to="/leaderboard" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Leaderboard</Link>
+          {user ? (
+            <UserProfileIcon />
+          ) : (
+            <Link to="/login-signup" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
+              Login or Signup
+            </Link>
+          )}
         </Div>
       </Div>
 

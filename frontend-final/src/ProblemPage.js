@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Div, Text, Button } from 'atomize';
 import Editor from "@monaco-editor/react";
+import axiosInstance from './axiosConfig';
 
 // Import mockProblems data
 const mockProblems = [
@@ -282,6 +283,40 @@ print(str(result).lower())
         const resultOutput = formatTestResults(testResults);
         setOutput(resultOutput);
         setIsCorrect(allTestsPassed);
+
+        if (allTestsPassed && isDuelMode) {
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (!user) {
+                    console.error('No user found in localStorage');
+                    return;
+                }
+
+                const timeTaken = 900 - timeLeft;
+                
+                console.log('Submitting to leaderboard:', {
+                    problemId: parseInt(id),
+                    username: user.username,
+                    timeInSeconds: timeTaken,
+                    completedAt: new Date().toISOString()
+                });
+
+                const leaderboardResponse = await axiosInstance.post('/leaderboard/submit', {
+                    problemId: parseInt(id),
+                    username: user.username,
+                    timeInSeconds: timeTaken,
+                    completedAt: new Date().toISOString()
+                });
+
+                if (leaderboardResponse.data) {
+                    setOutput(prev => `${prev}\n\nScore submitted to leaderboard!`);
+                    console.log('Leaderboard submission successful:', leaderboardResponse.data);
+                }
+            } catch (error) {
+                console.error('Error submitting to leaderboard:', error);
+                setOutput(prev => `${prev}\n\nError submitting to leaderboard: ${error.message}`);
+            }
+        }
 
     } catch (error) {
         setOutput(`Error: ${error.message}`);
