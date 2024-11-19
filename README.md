@@ -20,7 +20,7 @@ Front-End: `ReactJS` with `MUI` (Material-UI)
 
 Database: `MySQL`
 
-WebSocket: `TBD`
+API: `Axios`
 
 Development Environment: `Docker`
 
@@ -39,3 +39,7 @@ Nicholas Hermreck
 GitHub Commands: https://docs.google.com/document/d/1QDLvWocr1ZzOfDJWHIDcqL0KjYbnBgLPHBpo9Cz4Wnk/edit?usp=sharing
 
 Docker Setup and Usage (in context): https://docs.google.com/document/d/1K_JGmST5jqPNrK6aWo4QHkr0J23KWIf0hpZh8iINtPU/edit?usp=sharing
+
+Programming Questions Cheat Sheet: https://docs.google.com/document/d/1K9tGCdV6fSqsJzWrZ0t1ZLvTowZ8S6IJvqbL9FM3XYw/edit?usp=sharing
+
+Database Altering and Accessing: https://docs.google.com/document/d/1tPhJgNJONon_3qhyG2m08pmaPPvadVyZ0_tJ4NO0nuE/edit?usp=sharing
