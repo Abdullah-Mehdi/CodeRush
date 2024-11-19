@@ -1,4 +1,4 @@
-import com.coderush.checker.Checker;
+/* import com.coderush.checker.Checker;
 import com.coderush.codeeditor.CodeEditorService;
 import com.coderush.match.MatchService;
 import com.coderush.mysql.MySqlHandler;
@@ -101,3 +101,4 @@ public class TestApp {
         MySqlHandler.removeUser(user2.getUsername());
     }
 }
+ */

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Div, Text, Button } from 'atomize';
 import Editor from "@monaco-editor/react";
 
@@ -93,6 +93,7 @@ const ProblemPage = ({ isDuelMode }) => {
     const [processing, setProcessing] = useState(false);
     const [pyodide, setPyodide] = useState(null);
     const [currentProblem, setCurrentProblem] = useState(null);
+    const [isTimeUp, setIsTimeUp] = useState(false); 
 
       // Helper function to compare arrays - definining it before use
       const arraysEqual = (arr1, arr2) => {
@@ -124,13 +125,22 @@ const ProblemPage = ({ isDuelMode }) => {
         setCurrentProblem(problem);
     }, [id]);
 
-    // Timer for duel mode
+    // Timer logic with time up handling
     useEffect(() => {
-        if (isDuelMode && timeLeft > 0) {
-            const timer = setInterval(() => setTimeLeft(timeLeft - 1), 1000);
-            return () => clearInterval(timer);
-        }
-    }, [isDuelMode, timeLeft]);
+      if (isDuelMode && timeLeft > 0) {
+          const timer = setInterval(() => {
+              setTimeLeft(prev => {
+                  if (prev <= 1) {
+                      clearInterval(timer);
+                      setIsTimeUp(true);
+                      return 0;
+                  }
+                  return prev - 1;
+              });
+          }, 1000);
+          return () => clearInterval(timer);
+      }
+  }, [isDuelMode]);
 
     const handleLanguageChange = (e) => {
         setLanguage(e.target.value);
@@ -386,22 +396,74 @@ useEffect(() => {
                         bg="success700"
                         hoverBg="success800"
                         textColor="white"
-                        disabled={processing}
+                        disabled={processing || (isDuelMode && isTimeUp)}
                         w="45%"
+                        opacity={isDuelMode && isTimeUp ? "0.5" : "1"}
                     >
                         Submit Solution
                     </Button>
                 </Div>
+
+                {/* Output Window */}
                 <Div bg="gray100" p="1rem" rounded="md">
                     <Text tag="pre" textSize="body">
                         {output}
                     </Text>
                 </Div>
+
+                {/* Timer Display */}
                 {isDuelMode && (
-                    <Text textSize="body" m={{ t: "1rem" }}>
+                    <Text 
+                        textSize="body" 
+                        m={{ t: "1rem" }}
+                        textColor={isTimeUp ? "danger700" : "gray800"}
+                        d="flex"
+                        justify="center"
+                        bold={isTimeUp}
+                    >
                         Time Left: {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}
                     </Text>
                 )}
+
+                {/* Time Up Message */}
+                {isDuelMode && isTimeUp && (
+                    <Div
+                        bg="danger100"
+                        p="1rem"
+                        rounded="md"
+                        m={{ t: "1rem" }}
+                        border="1px solid"
+                        borderColor="danger700"
+                    >
+                        <Text
+                            textAlign="center"
+                            textColor="danger700"
+                            textSize="body"
+                        >
+                            Time's up! You can no longer submit your solution, but you can still:
+                            <ul style={{ marginTop: '0.5rem', marginBottom: '0.5rem' }}>
+                                <li>Run the code to test it</li>
+                                <li>Copy your code and try it in Practice mode</li>
+                            </ul>
+                        </Text>
+                        <Link 
+                            to={`/practice-mode/${id}`}
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <Button 
+                                bg="info700"
+                                hoverBg="info800"
+                                textColor="white"
+                                w="100%"
+                                m={{ t: "0.5rem" }}
+                            >
+                                Go to Practice Mode
+                            </Button>
+                        </Link>
+                    </Div>
+                )}
+
+                {/* Solution Result Message */}
                 {isCorrect !== null && (
                     <Text 
                         textSize="body" 

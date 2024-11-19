@@ -1,48 +1,88 @@
 import React, { useState } from 'react';
-import { Div, Text, Button, Anchor, Input, Icon } from 'atomize';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
+import { Div, Text, Button, Input } from 'atomize';
+import axiosInstance from './axiosConfig';
+import SuccessModal from './components/SuccessModal';
+import UserProfileIcon from './components/UserProfileIcon'; // Importing UserProfileIcon component
 
 function LoginSignup() {
-    const [isLoginMode, setIsLoginMode] = useState(true); // Toggle between Login and Signup
+    const [isLoginMode, setIsLoginMode] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
-    // Handle form submission
     const handleSubmit = async () => {
-        if (isLoginMode) {
-            // Login API call
-            try {
-                const response = await axios.post('http://localhost:8080/auth/login', {
+        try {
+            setErrorMessage('');
+
+        if (!validateForm()) {
+            return; // Stop execution if validation fails
+        }
+            
+            if (isLoginMode) {
+                // Login
+                const response = await axiosInstance.post('/auth/login', {
                     email,
-                    password,
+                    password
                 });
-                alert('Login successful!');
-                localStorage.setItem('token', response.data.token); // Store token
-                window.location.href = '/problem-library'; // Redirect
-            } catch (error) {
-                setErrorMessage('Login failed. Please check your credentials.');
-                console.error(error);
-            }
-        } else {
-            // Signup API call
-            try {
-                await axios.post('http://localhost:8080/auth/signup', {
+                
+                if (response.data) {
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                    setIsModalOpen(true); // Open the success modal
+                    // Navigation will happen after modal is closed
+                }
+            } else {
+                // Signup
+                const response = await axiosInstance.post('/auth/signup', {
                     username,
                     email,
-                    password,
+                    password
                 });
-                alert('Signup successful! Please login.');
-                setIsLoginMode(true); // Switch to login mode
-            } catch (error) {
-                setErrorMessage('Signup failed. Please try again.');
-                console.error(error);
+                
+                if (response.data) {
+                    setUsername('');
+                    setEmail('');
+                    setPassword('');
+                    setIsLoginMode(true);
+                    setErrorMessage('Signup successful! Please login.');
+                }
             }
+        } catch (error) {
+            console.error('Auth error:', error);
+            setErrorMessage(
+                error.response?.data?.message || 
+                error.response?.data || 
+                (isLoginMode ? 'Login failed. Please check your credentials.' : 'Signup failed. Please try again.')
+            );
         }
     };
 
+    const handleModalClose = () => {
+        setIsModalOpen(false);
+        navigate('/problem-library'); // Navigate after modal is closed
+    };
+    
+
+    // Form validation
+    const validateForm = () => {
+        if (!email || !password || (!isLoginMode && !username)) {
+            setErrorMessage('Please fill in all fields');
+            return false;
+        }
+        if (!email.includes('@')) {
+            setErrorMessage('Please enter a valid email');
+            return false;
+        }
+        if (password.length < 6) {
+            setErrorMessage('Password must be at least 6 characters');
+            return false;
+        }
+        return true;
+    };
+    
     return (
         <Div d="flex" flexDir="column" minH="100vh">
             {/* Header and Navigation */}
@@ -80,7 +120,12 @@ function LoginSignup() {
 
                     {/* Error Message */}
                     {errorMessage && (
-                        <Text textColor="danger700" textAlign="center" m={{ b: "1rem" }}>
+                        <Text 
+                            textSize="body" 
+                            textColor={errorMessage.includes('successful') ? "success700" : "danger700"}
+                            m={{ t: "1rem" }}
+                            textAlign="center"
+                        >
                             {errorMessage}
                         </Text>
                     )}
@@ -177,6 +222,55 @@ function LoginSignup() {
                 <Text textSize="body" textColor="gray800">
                     Designed & Developed by Team 6
                 </Text>
+            </Div>
+
+                {/* Success Modal */}
+                <Div
+                pos="fixed"
+                top="0"
+                left="0"
+                right="0"
+                bottom="0"
+                d={isModalOpen ? "flex" : "none"}
+                justify="center"
+                align="center"
+                bg="rgba(0,0,0,0.5)"
+                zIndex="1000"
+                onClick={handleModalClose}
+            >
+                <Div
+                    bg="white"
+                    p="2rem"
+                    rounded="lg"
+                    shadow="4"
+                    maxW="400px"
+                    onClick={e => e.stopPropagation()}
+                >
+                    <Text
+                        tag="h2"
+                        textSize="title"
+                        m={{ b: "1rem" }}
+                        textColor="success700"
+                    >
+                        Login Successful!
+                    </Text>
+                    <Text
+                        textSize="paragraph"
+                        m={{ b: "1.5rem" }}
+                        textColor="gray800"
+                    >
+                        Welcome! You can now start coding and solving problems.
+                    </Text>
+                    <Button
+                        onClick={handleModalClose}
+                        bg="info700"
+                        hoverBg="info800"
+                        w="100%"
+                        textColor="white"
+                    >
+                        Let's Start Coding!
+                    </Button>
+                </Div>
             </Div>
         </Div>
     );
