@@ -29,6 +29,7 @@ function LandingPage() {
           <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>
             Problem Library
           </Link>
+          <Link to="/leaderboard" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Leaderboard</Link>
           {user ? (
             <UserProfileIcon />
           ) : (

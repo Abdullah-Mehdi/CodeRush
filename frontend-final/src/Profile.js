@@ -14,6 +14,7 @@ const Profile = () => {
                 <Div d="flex" align="center">
                     <Link to="/" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Home</Link>
                     <Link to="/problem-library" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Problem Library</Link>
+                    <Link to="/leaderboard" style={{ color: 'black', marginRight: '1.5rem', textDecoration: 'none' }}>Leaderboard</Link>
                     {user ? (
                         <UserProfileIcon />
                     ) : (

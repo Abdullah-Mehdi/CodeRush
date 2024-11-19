@@ -7,6 +7,7 @@ import Duel from './Duel';
 import LoginSignup from './LoginSignup';
 import './index.css';
 import Profile from './Profile';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   // Add this useEffect hook to set the document title
@@ -23,6 +24,7 @@ function App() {
         <Route path="/duel/:id" element={<Duel />} />
         <Route path="/login-signup" element={<LoginSignup />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </Router>
   );
