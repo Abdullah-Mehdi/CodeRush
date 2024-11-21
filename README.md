@@ -43,3 +43,5 @@ Docker Setup and Usage (in context): https://docs.google.com/document/d/1K_JGmST
 Programming Questions Cheat Sheet: https://docs.google.com/document/d/1K9tGCdV6fSqsJzWrZ0t1ZLvTowZ8S6IJvqbL9FM3XYw/edit?usp=sharing
 
 Database Altering and Accessing: https://docs.google.com/document/d/1tPhJgNJONon_3qhyG2m08pmaPPvadVyZ0_tJ4NO0nuE/edit?usp=sharing
+
+Using the test files: https://docs.google.com/document/d/1AiwqacfTqWHKu7QUrnAxHZvLeXFo3zvlnmL-6SblfHo/edit?usp=sharing
