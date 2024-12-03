@@ -1,0 +1,9 @@
+Database References:
+https://www.w3schools.com/mysql/
+https://docs.oracle.com/javase/tutorial/jdbc/basics/
+https://dev.mysql.com/
+https://www.mysqltutorial.org/mysql-basics/
+https://docs.oracle.com/javase/8/docs/api/java/sql/ResultSet.html
+CS450 Project 2 Summer 2024
+https://aiven.io/docs/products/mysql/howto/connect-with-java
+
